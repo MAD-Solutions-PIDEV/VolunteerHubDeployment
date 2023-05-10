@@ -489,17 +489,6 @@ const EventForm = () => {
   };
 
   useEffect(() => {
-    async function fetchCities() {
-      axios
-        .get(
-          `http://api.openweathermap.org/data/2.5/find?q=tunisia&type=like&sort=population&appid=a423008808d021cced1573c3489aabf6`
-        )
-        .then((response) => setCities(response.data.list));
-    }
-    fetchCities();
-  }, []);
-
-  useEffect(() => {
     async function fetchOrg() {
       if (user) {
         const response = await axios.get(
