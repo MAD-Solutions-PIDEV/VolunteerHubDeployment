@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import EventService from "services/event.service";
-//import Chart from "chart.js/auto";
+import Chart from "chart.js/auto";
 
 function EventsChart({ events }) {
   const [eventsData, setEventsData] = useState([]);

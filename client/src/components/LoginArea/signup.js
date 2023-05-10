@@ -516,7 +516,7 @@ function Signup() {
             )}
 
             <label className="resetPwd">
-              <a href="https://volunteerhub.onrender.com/email">
+              <a href="https://volunteerhub-eo7t.onrender.comr.com/email">
                 Reset Password
               </a>
             </label>
@@ -725,7 +725,7 @@ function Signup() {
                     />
                     &nbsp;&nbsp;By signing up, I agree to VolunteerHub's{" "}
                     <a
-                      href="https://volunteerhub.onrender.com/terms"
+                      href="https://volunteerhub-eo7t.onrender.comr.com/terms"
                       target="_blank"
                       rel="Terms volunteerHub"
                     >
@@ -844,7 +844,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="https://volunteerhub.onrender.com/assets/img/login.svg"
+            src="https://volunteerhub-eo7t.onrender.comr.com/assets/img/login.svg"
             className={styles.image}
             alt=""
           />
@@ -864,7 +864,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="https://volunteerhub.onrender.com/assets/img/signup.svg"
+            src="https://volunteerhub-eo7t.onrender.comr.com/assets/img/signup.svg"
             className={styles.image}
             alt=""
           />
