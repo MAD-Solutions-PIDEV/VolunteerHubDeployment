@@ -13,6 +13,7 @@ import axios from "axios";
 
 import OrganizationService from "services/organizationService";
 import OrganizationItem from "components/Organization/OrganizationArea/OrganizationItem";
+import GalleryPage from "components/PortfolioArea/GalleryPage";
 
 const { thumb } = aboutIntroduction;
 
@@ -644,6 +645,14 @@ const ProfileIntroduction = () => {
                               </div>
                             </div>
                           )}
+                          <br />
+                          <br />
+                          <h4>My NFTs</h4>
+                          <div className="mt-200">
+                            <div className={`team-main-area ${""}`}>
+                              <GalleryPage />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -170,6 +170,7 @@ exports.follow = async (req, res) => {
     // Check if User is already has joined the event
     if (
       event.participants.some((participant) => {
+        addScore(req.body.userId);
         return participant._id.equals(req.body.userId);
       })
     ) {
@@ -364,8 +365,8 @@ function template(
             <br>
             <p>Best regards,</p>
             <p>The VolunteerHub Team</p>
-            <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
-            <p style="text-align: center;"><a href="https://volunteerhub.onrender.com/event/${id}" style="text-decoration: none; color:white" class="btn">View Event</a></p>
+            <a href="https://volunteerhub-eo7t.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+            <p style="text-align: center;"><a href="https://volunteerhub-eo7t.onrender.com/event/${id}" style="text-decoration: none; color:white" class="btn">View Event</a></p>
           </div>
         </body>
       </html> 
@@ -825,14 +826,19 @@ exports.checkGame = async (req, res) => {
 
 exports.getNFT = async (req, res) => {
   const userId = req.params.userId;
-  User.findById(userId, "nfts", (err, user) => {
-    if (err) {
-      console.error(err);
-      // Handle error
-    } else {
-      const nfts = user.nfts;
-      res.send(nfts);
-      console.log(nfts);
+  try {
+    // Retrieve the user's data from the database
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  });
+
+    // Retrieve the user's NFTs
+    const nfts = user.nfts;
+
+    res.json(nfts);
+  } catch (error) {
+    console.log("Error retrieving user NFTs:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };

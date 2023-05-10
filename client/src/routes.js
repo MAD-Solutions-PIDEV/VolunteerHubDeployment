@@ -71,6 +71,7 @@ import BlogDetailsMain from "components/EventArea/BlogDetails/BlogDetailsMain";
 import Rank from "pages/rank";
 import Winner from "components/Compition/Winner";
 import EventsChart from "components/Organization/OrganizationsDetails/eventsChart";
+import PortfolioArea from "components/PortfolioArea/PortfolioArea";
 
 const renderRoutes = () => (
   <Routes>
@@ -100,18 +101,15 @@ const renderRoutes = () => (
 
     <Route path=":id/updatehost" element={<UpdateHost />} />
     <Route path="/faq" element={<Faq />} />
-    <Route path="/gallery" element={<GalleryPage />} />
+    <Route path="/gallery/:id" element={<PortfolioArea />} />
     <Route path="/news" element={<News />} />
     <Route path="/rank" element={<Rank />} />
 
     <Route path="news/">
-        <Route path="" element={<News />} />
-     
-        <Route path=":id/" element={<SingleNews />} />
-       
+      <Route path="" element={<News />} />
 
-       
-      </Route>
+      <Route path=":id/" element={<SingleNews />} />
+    </Route>
     <Route path="/projects-1" element={<Projects />} />
     <Route path="/events" element={<Projects2 />} />
 

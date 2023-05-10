@@ -16,7 +16,7 @@ const SingleExploreCampaign = ({ campaign = {} }) => {
   const { image, title, goalAmount, currentAmount, deadline } = campaign;
   console.log(campaign);
   useEffect(() => {
-    document.title = "Campaigns list"; // set new title
+    //document.title = "Campaigns list"; // set new title
   }, []);
   return (
     <div className="explore-projects-item mt-30">

@@ -844,7 +844,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="https://volunteerhub-eo7t.onrender.comr.com/assets/img/login.svg"
+            src="https://volunteerhub-eo7t.onrender.com/assets/img/login.svg"
             className={styles.image}
             alt=""
           />
@@ -864,7 +864,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="https://volunteerhub-eo7t.onrender.comr.com/assets/img/signup.svg"
+            src="https://volunteerhub-eo7t.onrender.com/assets/img/signup.svg"
             className={styles.image}
             alt=""
           />
