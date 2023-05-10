@@ -11,24 +11,27 @@ const BlogDetailsMain = ({ news }) => {
   return (
     <div className="blog-details__main">
       <div className="blog-details__image">
-      
-        
-         {news.author =="Admin" &&
-        (
-          <Image src={require(`../../../../../../server/uploads/images/${news.imageNews}`)} 
-          alt="thumb"
-          style={{ width: "600px", height: "400px" }}        />)}
-         {news.author =="United nations" &&
-        (<Image
-         src={news.imageNews}
-          alt="thumb"
-          style={{ width: "600px", height: "400px" }}        />)}
-         {news.author =="BBC" &&
-        (<Image
-          srcset={news.imageNews}
-          alt="thumb"
-          style={{ width: "600px", height: "400px" }}        />)}
-      
+        {news.author == "Admin" && (
+          <Image
+            src={require(`https://volunteerhub-backend.onrender.com/uploads/images/${news.imageNews}`)}
+            alt="thumb"
+            style={{ width: "600px", height: "400px" }}
+          />
+        )}
+        {news.author == "United nations" && (
+          <Image
+            src={news.imageNews}
+            alt="thumb"
+            style={{ width: "600px", height: "400px" }}
+          />
+        )}
+        {news.author == "BBC" && (
+          <Image
+            srcset={news.imageNews}
+            alt="thumb"
+            style={{ width: "600px", height: "400px" }}
+          />
+        )}
       </div>
       <div className="blog-details__content">
         <span>{formattedDate}</span>
@@ -37,16 +40,13 @@ const BlogDetailsMain = ({ news }) => {
             <i className="fa fa-user-o"></i> {news.author}
           </a>
           <a href="#">
-            <i className="fa fa-comments-o"></i> {comments} comments 
+            <i className="fa fa-comments-o"></i> {comments} comments
           </a>
         </div>
         <h3>{news.title}</h3>
         <p>{news.description}</p>
       </div>
-      <div className="blog-details__meta">
-       
-     
-      </div>
+      <div className="blog-details__meta"></div>
     </div>
   );
 };

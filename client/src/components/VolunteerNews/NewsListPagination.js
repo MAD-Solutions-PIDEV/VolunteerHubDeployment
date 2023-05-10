@@ -131,7 +131,7 @@ function NewsListPagination() {
                                 {" "}
                                 {news.author == "Admin" && (
                                   <Image
-                                    src={require(`../../../../server/uploads/images/${news.imageNews}`)}
+                                    src={require(`https://volunteerhub-backend.onrender.com/uploads/images/${news.imageNews}`)}
                                     alt="news"
                                     style={{ width: "50px", height: "40px" }}
                                   />
