@@ -11,13 +11,13 @@ const BlogDetailsMain = ({ news }) => {
   return (
     <div className="blog-details__main">
       <div className="blog-details__image">
-        {news.author == "Admin" && (
+        {/* {news.author == "Admin" && (
           <Image
             src={require(`https://volunteerhub-backend.onrender.com/uploads/images/${news.imageNews}`)}
             alt="thumb"
             style={{ width: "600px", height: "400px" }}
           />
-        )}
+        )} */}
         {news.author == "United nations" && (
           <Image
             src={news.imageNews}
