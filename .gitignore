@@ -7,5 +7,4 @@ client/public/assets/img/bg.mp4
 client/public/assets/img/favicon.gif
 .vscode/settings.json
 .vscode
-/server/uploads/*
 /server/venv

@@ -179,7 +179,7 @@ cron.schedule("0 0 1 1,3,6,9 *", () => {
 });
 
 // Start the campaign scheduler cron job
-cron.schedule("*/60 * * * * *", () => {
+cron.schedule("*/30 * * * * *", () => {
   console.log("Campaign Schedular loading ");
   checkCampaignStatus();
 });
