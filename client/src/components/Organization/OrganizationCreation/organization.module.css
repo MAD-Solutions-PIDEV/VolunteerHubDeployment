@@ -1,0 +1,50 @@
+.tagInputContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tag:hover {
+    background-color: #e0e0e0;
+  }
+
+  input[name='wallet'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+  input[name='wallet']:after {
+    font-family: 'FontAwesome';
+    text-align: center;
+    font-size: 30px;
+    content: attr(data-icon);
+    padding: 10px 2px;
+    border-radius: 15px;
+    color: rgba(0,0,0,0.4);
+    transition: box-shadow 1s, color 1s;
+  }
+  input[name='wallet']:checked:after {
+    box-shadow: 2px 2px 150px #29F0B5;
+    color: #29F0B5;
+  }
+  

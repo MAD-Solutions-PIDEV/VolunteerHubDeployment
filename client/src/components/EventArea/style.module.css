@@ -1,0 +1,64 @@
+.select{
+    width: 100%;
+    height: 70px;
+    background: #f7f7f9;
+    border-radius: 0px;
+    border: 0;
+    padding-left: 30px;
+    color: #838694;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.tag{
+    right: -18px;
+    position: relative;
+}
+
+input[name='status'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: none;
+    margin-right:25px;
+  }
+  input[name='status']:after {
+    font-family: 'FontAwesome';
+    text-align: center;
+    font-size: 30px;
+    content: attr(data-icon);
+    padding: 10px 2px;
+    border-radius: 15px;
+    color: rgba(0,0,0,0.4);
+    transition: box-shadow 1s, color 1s;
+  }
+  input[name='status']:checked:after {
+    box-shadow: 2px 2px 150px #29F0B5;
+    color: #29F0B5;
+  }
+
+input[name='subscribe'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: none;
+    margin-right:25px;
+  }
+  input[name='subscribe']:after {
+    font-family: 'FontAwesome';
+    text-align: center;
+    font-size: 30px;
+    content: attr(data-icon);
+    padding: 10px 2px;
+    border-radius: 15px;
+    color: rgba(0,0,0,0.4);
+    transition: box-shadow 1s, color 1s;
+  }
+  input[name='subscribe']:checked:after {
+    box-shadow: 2px 2px 150px #29F0B5;
+    color: #29F0B5;
+  }

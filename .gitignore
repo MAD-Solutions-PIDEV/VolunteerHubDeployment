@@ -1,0 +1,12 @@
+/client/node_modules
+/server/node_modules
+.env
+.idea/
+client/public/assets/img/bg.mov
+client/public/assets/img/bg.mp4
+client/public/assets/img/favicon.gif
+.vscode/settings.json
+.vscode
+/server/uploads/*
+/server/venv
+server/utilities/badWords.json

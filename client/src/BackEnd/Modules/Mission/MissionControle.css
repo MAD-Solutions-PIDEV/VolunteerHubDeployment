@@ -1,0 +1,15 @@
+.mission-select {
+  font-size: 14px;
+  color: #333;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+.mission-select:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 5px #6a5acd;
+}

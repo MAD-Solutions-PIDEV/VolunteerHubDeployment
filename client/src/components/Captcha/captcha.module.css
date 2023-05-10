@@ -1,0 +1,27 @@
+.verify_btn{
+  width: 100px;
+  background-color: #B4A5F8;
+  border: none;
+  outline: none;
+  height: 40px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.emoji{
+    font-size: 3rem;
+    margin-right: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.emoji.selectedOption {
+    border: 1px solid #674DEF;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px #674DEF;
+}

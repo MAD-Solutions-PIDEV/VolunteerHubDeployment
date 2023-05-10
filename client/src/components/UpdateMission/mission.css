@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+.selectview{
+    width: 38%;
+    height: 43px;
+    margin-left: 3%;
+    background: #f7f7f9;
+    /* border-radius: 0px; */
+    border: 0;
+    padding-left: 47px;
+    color: #838694;
+    border-radius: 10%;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.selectMissionLocation {
+    width: 100%;
+    height: 70px;
+    background: #f7f7f9;
+    border-radius: 0px;
+    border: 0;
+    padding-left: 30px;
+    color: #909195;
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
