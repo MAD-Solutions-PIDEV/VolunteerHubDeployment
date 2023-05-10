@@ -9,4 +9,3 @@ client/public/assets/img/favicon.gif
 .vscode
 /server/uploads/*
 /server/venv
-server/utilities/badWords.json
