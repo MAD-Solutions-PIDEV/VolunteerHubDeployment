@@ -18,7 +18,12 @@ const CampaignCard = ({ campaign = {}, index = 0, campaignTwo = false }) => {
         }`}
       >
         <div className="campaign-thumb">
-          <Image src={`http://localhost:4000/uploads/${image}`} fluid width="400px" height="200px" />
+          <Image
+            src={`https://volunteerhub-backend.onrender.com/uploads/${image}`}
+            fluid
+            width="400px"
+            height="200px"
+          />
         </div>
         <div className="campaign-content">
           <span>

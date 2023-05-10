@@ -322,11 +322,17 @@ const Login = () => {
   const handleClick = () => setClick(!click);
 
   const googleAuth = () => {
-    window.open("http://localhost:4000/auth/google/callback", "_self");
+    window.open(
+      "https://volunteerhub-backend.onrender.com/auth/google/callback",
+      "_self"
+    );
   };
 
   const facebookAuth = () => {
-    window.open("http://localhost:4000/auth/facebook/callback", "_self");
+    window.open(
+      "https://volunteerhub-backend.onrender.com/auth/facebook/callback",
+      "_self"
+    );
   };
   const ForgotPassword = () => {
     window.open("http://localhost:3000/email", "_self");

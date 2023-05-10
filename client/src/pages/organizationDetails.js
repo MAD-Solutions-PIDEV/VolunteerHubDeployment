@@ -16,7 +16,7 @@ const SingleOrganization = () => {
     const fetchOrganization = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/organizations/org/${id}`
+          `https://volunteerhub-backend.onrender.com/organizations/org/${id}`
         );
         setOrganization(response.data);
         console.log(organization);

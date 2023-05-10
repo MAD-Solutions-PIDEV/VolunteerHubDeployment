@@ -5,7 +5,10 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import Title from "../Reuseable/Title";
 import axios from "axios";
 import classNames from "classnames";
-import { getMissionById, updateMission } from "BackEnd/Modules/services/missionService";
+import {
+  getMissionById,
+  updateMission,
+} from "BackEnd/Modules/services/missionService";
 import { exploreskills } from "data/UpdateArea";
 import Multiselect from "multiselect-react-dropdown";
 function NotificationBar({ message }) {
@@ -18,7 +21,6 @@ function NotificationBar({ message }) {
 const { skill } = exploreskills;
 
 const UpdateMissionArea = () => {
-
   const { id } = useParams();
   const [mission, setMission] = useState({
     Title: "",
@@ -40,7 +42,9 @@ const UpdateMissionArea = () => {
 
   useEffect(() => {
     const getMission = async () => {
-      const response = await axios.get(`http://localhost:4000/missions/${id}`);
+      const response = await axios.get(
+        `https://volunteerhub-backend.onrender.com/missions/${id}`
+      );
       setMission(response.data);
     };
 
@@ -55,13 +59,15 @@ const UpdateMissionArea = () => {
     LocMission();
   }, []);
 
-
   useEffect(() => {
     fetch("https://restcountries.com/v2/all")
       .then((response) => response.json())
       .then((data) => {
         const allLanguages = data.reduce((acc, country) => {
-          return [...acc, ...country.languages.map((language) => language.name)];
+          return [
+            ...acc,
+            ...country.languages.map((language) => language.name),
+          ];
         }, []);
         const uniqueLanguages = [...new Set(allLanguages)];
         setLanguages(uniqueLanguages);
@@ -80,14 +86,11 @@ const UpdateMissionArea = () => {
       }
     }
     setMission(SkillsRequired);
-  }
+  };
 
   const handleUpdate = () => {
     const updatedMission = {
-
-      ...mission
-
-
+      ...mission,
     };
 
     updateMission(id, updatedMission)
@@ -109,7 +112,6 @@ const UpdateMissionArea = () => {
 
   return (
     <>
-    
       <section className="contact-form-area">
         <Container>
           <Row className="justify-content-center">
@@ -121,7 +123,7 @@ const UpdateMissionArea = () => {
             <Col lg={8}>
               <NotificationBar message={notification} />{" "}
               {/* Render notification bar */}
-              <form onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit}>
                 <div className="conact-form-item">
                   <Row>
                     <div className="input-box mt-0 mt-0 text-center form-label fw-bold">
@@ -137,7 +139,9 @@ const UpdateMissionArea = () => {
                           type="text"
                           placeholder="Title"
                           defaultValue={mission.Title}
-                          onChange={(e) => setMission({ ...mission, Title: e.target.value })}
+                          onChange={(e) =>
+                            setMission({ ...mission, Title: e.target.value })
+                          }
                         />
                       </div>
 
@@ -147,7 +151,12 @@ const UpdateMissionArea = () => {
                           type="text"
                           placeholder="description"
                           defaultValue={mission.Description}
-                          onChange={(e) => setMission({ ...mission, Description: e.target.value })}
+                          onChange={(e) =>
+                            setMission({
+                              ...mission,
+                              Description: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="input-box mt-20">
@@ -155,8 +164,17 @@ const UpdateMissionArea = () => {
                         <input
                           type="date"
                           placeholder="startDate"
-                          defaultValue={mission.StartDate ? mission.StartDate.substring(0, 10) : ''}
-                          onChange={(e) => setMission({ ...mission, StartDate: e.target.value })}
+                          defaultValue={
+                            mission.StartDate
+                              ? mission.StartDate.substring(0, 10)
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setMission({
+                              ...mission,
+                              StartDate: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="input-box mt-20">
@@ -164,8 +182,14 @@ const UpdateMissionArea = () => {
                         <input
                           type="date"
                           placeholder="End date"
-                          defaultValue={mission.EndDate ? mission.EndDate.substring(0, 10) : ''}
-                          onChange={(e) => setMission({ ...mission, EndDate: e.target.value })}
+                          defaultValue={
+                            mission.EndDate
+                              ? mission.EndDate.substring(0, 10)
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setMission({ ...mission, EndDate: e.target.value })
+                          }
                         />
                       </div>
                       {/* <div className="input-box mt-20">
@@ -178,17 +202,15 @@ const UpdateMissionArea = () => {
                         />
                       </div> */}
 
-
                       <div className="input-box mt-20">
-
                         <label htmlFor="location">Location :</label>
                         <select
-
                           value={mission.Location}
                           className="selectMissionLocation"
-                          onChange={(e) => setMission({ ...mission, Location: e.target.value })}
+                          onChange={(e) =>
+                            setMission({ ...mission, Location: e.target.value })
+                          }
                           name="Location"
-
                         >
                           <option value="">Select a Location</option>
                           {countries.map((country) => (
@@ -202,24 +224,27 @@ const UpdateMissionArea = () => {
                         </select>
                       </div>
 
-
-
                       <div className="input-box mt-20">
                         <label htmlFor="language">Language Required :</label>
                         <select
                           value={mission.LanguageRequired}
                           className="selectMissionLocation"
-                          onChange={(e) => setMission({ ...mission, LanguageRequired: e.target.value })}
+                          onChange={(e) =>
+                            setMission({
+                              ...mission,
+                              LanguageRequired: e.target.value,
+                            })
+                          }
                           name="Language"
                         >
                           <option value="">Select a Language</option>
                           {languages.map((language) => (
-                            <option key={language} value={language}>{language}</option>
+                            <option key={language} value={language}>
+                              {language}
+                            </option>
                           ))}
                         </select>
                       </div>
-
-
 
                       {/* <div className="input-box mt-20">
                         <label htmlFor="languageRequired"> Language Required :</label>
@@ -251,20 +276,26 @@ const UpdateMissionArea = () => {
                           displayValue="skill"
                           onSelect={(selectedList, selectedItem) => {
                             console.log(selectedList); // check the value of selectedList
-                            setMission({ ...mission, SkillsRequired: selectedList });
+                            setMission({
+                              ...mission,
+                              SkillsRequired: selectedList,
+                            });
                             console.log(mission.SkillsRequired); // check the value of mission.SkillsRequired
                           }}
                           onRemove={(selectedList, removedItem) => {
                             console.log(selectedList); // check the value of selectedList
-                            setMission({ ...mission, SkillsRequired: selectedList });
+                            setMission({
+                              ...mission,
+                              SkillsRequired: selectedList,
+                            });
                             console.log(mission.SkillsRequired); // check the value of mission.SkillsRequired
                           }}
                           onChange={handleSelectionChange}
-                        // onChange={(e) => {
-                        //   setMission((...mission) => {
-                        //     return { ...mission, SkillsRequired: e.target.value };
-                        //   });
-                        // }}
+                          // onChange={(e) => {
+                          //   setMission((...mission) => {
+                          //     return { ...mission, SkillsRequired: e.target.value };
+                          //   });
+                          // }}
                         />
                         {/* {exploreskills?.map((skillname, index) => {
                         return (
@@ -273,26 +304,26 @@ const UpdateMissionArea = () => {
                             <hr />
                           </option>
                         );})} */}
-
                       </div>
                       <div className="input-box mt-20 ">
-
                         <label htmlFor="category">Category:</label>
                         <select
                           className="selectview"
                           placeholder="Category"
                           value={mission.Category}
-                          onChange={(e) => setMission({ ...mission, Category: e.target.value })}
+                          onChange={(e) =>
+                            setMission({ ...mission, Category: e.target.value })
+                          }
                         >
                           <option value="School">School</option>
                           <option value="Family">Family</option>
                           <option value="NGO">NGO</option>
                           <option value="Nature">Nature</option>
                           <option value="Communities">Communities</option>
-                          <option value="Sustainable Projects">Sustainable Projects</option>
-
+                          <option value="Sustainable Projects">
+                            Sustainable Projects
+                          </option>
                         </select>
-
                       </div>
                       <div className="input-box mt-20 custom-file">
                         <input
@@ -300,8 +331,12 @@ const UpdateMissionArea = () => {
                           className="custom-file-input"
                           id="inputGroupFile04"
                           aria-describedby="inputGroupFileAddon04"
-                          onChange={(e) => setMission({ ...mission, Image: (URL.createObjectURL(e.target.files[0])) })}
-
+                          onChange={(e) =>
+                            setMission({
+                              ...mission,
+                              Image: URL.createObjectURL(e.target.files[0]),
+                            })
+                          }
                           style={{ display: "none" }}
                         />
                         <label
@@ -312,18 +347,21 @@ const UpdateMissionArea = () => {
                             id="file-input"
                             type="file"
                             style={{ display: "none" }}
-                            onInput={(e) => setMission({ ...mission, Image: (URL.createObjectURL(e.target.files[0])) })}
-
+                            onInput={(e) =>
+                              setMission({
+                                ...mission,
+                                Image: URL.createObjectURL(e.target.files[0]),
+                              })
+                            }
                           />
                           Update Profile Picture
                         </label>
-                      </div>   
+                      </div>
                       <Image
-            src={`http://localhost:4000/uploads/${mission.Image}`}
-            alt="orgLogo"
-            fluid
-          />
-
+                        src={`https://volunteerhub-backend.onrender.com/uploads/${mission.Image}`}
+                        alt="orgLogo"
+                        fluid
+                      />
                     </Col>
 
                     <Col lg={12}>
@@ -332,10 +370,6 @@ const UpdateMissionArea = () => {
                           Update Mission
                         </button>
                       </div>
-
-
-
-
                     </Col>
                   </Row>
                 </div>

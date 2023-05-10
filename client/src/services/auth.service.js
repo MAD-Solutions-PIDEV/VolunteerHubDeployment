@@ -2,7 +2,7 @@ import axios from "axios";
 import { UAParser } from "ua-parser-js";
 import { isExpired } from "react-jwt";
 
-const API_URL = "http://localhost:4000/api/auth/";
+const API_URL = "https://volunteerhub-backend.onrender.com/api/auth/";
 // [SignIn] get User information and send request to the BackEnd
 const login = (identifier, password) => {
   return axios //

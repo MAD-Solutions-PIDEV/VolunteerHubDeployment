@@ -11,10 +11,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-
-
 const BlogDetails = () => {
-
   const [news, setNews] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -22,7 +19,9 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/news/${id}`);
+        const response = await axios.get(
+          `https://volunteerhub-backend.onrender.com/news/${id}`
+        );
         setNews(response.data.news);
       } catch (error) {
         setError(error.response.data.message);
@@ -31,10 +30,6 @@ const BlogDetails = () => {
 
     fetchNews();
   }, [id]);
-
-
-
-
 
   if (!news) {
     return <div>Loading...</div>;
@@ -66,10 +61,8 @@ const BlogDetails = () => {
           <Col lg={8}>
             <BlogDetailsMain news={news} />
 
-        {/*   <CommentOne comments={comments} news={news} /> */} 
-
+            {/*   <CommentOne comments={comments} news={news} /> */}
           </Col>
-
         </Row>
       </Container>
     </section>

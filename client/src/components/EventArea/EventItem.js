@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const EventItem = ({ event = {}, index = 0, eventTwo = false }) => {
-  const {   comments } = event;
+  const { comments } = event;
   const isEven = (index + 1) % 2 === 0;
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -30,20 +30,26 @@ const EventItem = ({ event = {}, index = 0, eventTwo = false }) => {
     <Col lg={eventTwo ? 4 : 3} md={eventTwo ? 7 : 6}>
       <div
         className={`news-item mt-30${
-          !eventTwo && isEven ? " d-flex flex-column flex-md-column-reverse" : ""
+          !eventTwo && isEven
+            ? " d-flex flex-column flex-md-column-reverse"
+            : ""
         }`}
       >
         <div className="news-thumb">
           <Image
-            src={(`http://localhost:4000/uploads/${event.image}`)}
+            src={`https://volunteerhub-backend.onrender.com/uploads/${event.image}`}
             alt="news"
           />
         </div>
         <div className="news-content">
-          <span>Still: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s </span>
+          <span>
+            Still: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
+            {timeLeft.seconds}s{" "}
+          </span>
           <ul>
             <li>
-              <i className="fa fa-user-circle"></i> {event ? event.organization?.name : "Loading..."}
+              <i className="fa fa-user-circle"></i>{" "}
+              {event ? event.organization?.name : "Loading..."}
             </li>
             <li>
               <i className="fa fa-comments-o"></i> {comments} Comments
@@ -51,10 +57,10 @@ const EventItem = ({ event = {}, index = 0, eventTwo = false }) => {
           </ul>
           <h3 className="title">{event.name}</h3>
           <Link href={`/event?id=${event._id}`}>
-              <i className="fa fa-external-link-alt"></i>
+            <i className="fa fa-external-link-alt"></i>
           </Link>
           <Link href="/single-news">
-          <i className="flaticon-like"></i>
+            <i className="flaticon-like"></i>
           </Link>
         </div>
       </div>

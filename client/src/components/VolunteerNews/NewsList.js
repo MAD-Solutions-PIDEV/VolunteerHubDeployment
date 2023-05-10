@@ -12,7 +12,9 @@ function NewsList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/news");
+        const response = await axios.get(
+          "https://volunteerhub-backend.onrender.com/news"
+        );
         setNewsData(response.data);
       } catch (error) {
         console.error(error);
@@ -22,10 +24,11 @@ function NewsList() {
     fetchData();
   }, []);
 
-
   const handleRefreshClickUnitedNations = async () => {
     try {
-       await axios.get("http://localhost:4000/news/getNewsUnitedNations");
+      await axios.get(
+        "https://volunteerhub-backend.onrender.com/news/getNewsUnitedNations"
+      );
     } catch (error) {
       console.error(error);
     }
@@ -34,16 +37,18 @@ function NewsList() {
   };
   const handleRefreshClickBBC = async () => {
     try {
-       await axios.get("http://localhost:4000/news/getNewsBBcAfrica");
+      await axios.get(
+        "https://volunteerhub-backend.onrender.com/news/getNewsBBcAfrica"
+      );
     } catch (error) {
       console.error(error);
     }
 
     window.location.reload();
-  };  
-  console.log('news : ' + JSON.stringify(newsData));
-  console.log('type n:' + typeof newsData); // Check the type of newses prop
-  console.log('type n2:' + typeof newsData.news); // Check the type of newses prop
+  };
+  console.log("news : " + JSON.stringify(newsData));
+  console.log("type n:" + typeof newsData); // Check the type of newses prop
+  console.log("type n2:" + typeof newsData.news); // Check the type of newses prop
   const newses = newsData.news;
   return (
     <div class="main_content_iner ">
@@ -53,15 +58,29 @@ function NewsList() {
             <div class="white_card card_height_100 mb_30">
               <div class="white_card_header">
                 <div class="box_header m-0">
-                  <div class="main-title" >
+                  <div class="main-title">
                     <h3 class="m-0">List News</h3>
                   </div>
                 </div>
-                <div style={{ textAlign: 'right' }}> 
-                  <Button class="btn_1" onClick={() => navigate("/dashboard/news/addNews")}>Join News</Button>&nbsp;&nbsp;
-                   <Button class="btn_1" onClick={handleRefreshClickUnitedNations}>Join News United Nations</Button>&nbsp;&nbsp;
-                   <Button class="btn_1" onClick={handleRefreshClickBBC}>Join News BBC</Button></div>
-
+                <div style={{ textAlign: "right" }}>
+                  <Button
+                    class="btn_1"
+                    onClick={() => navigate("/dashboard/news/addNews")}
+                  >
+                    Join News
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button
+                    class="btn_1"
+                    onClick={handleRefreshClickUnitedNations}
+                  >
+                    Join News United Nations
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button class="btn_1" onClick={handleRefreshClickBBC}>
+                    Join News BBC
+                  </Button>
+                </div>
               </div>
               <div class="white_card_body">
                 <div class="QA_section">
@@ -77,45 +96,50 @@ function NewsList() {
                         </tr>
                       </thead>
                       <tbody>
-                        {newsData && newses && newses.map((news) => (
-                          <tr key={news._id}>
-                            <td>{news.title}</td>
-                            <td>{news.author}</td>
-                            <td>{description(news.description)}</td>
-                            <td>   {news.author === "Admin" &&
-                              (<Image
-                                src={require(`../../../../server/uploads/images/${news.imageNews}`)}
-                                alt="news"
-                                style={{ width: "50px", height: "40px" }}
-                              />)}
-                              {news.author === "United nations" &&
-                                (<Image
-                                  src={news.imageNews}
-                                  alt="news"
-                                  style={{ width: "50px", height: "40px" }}
-                                  />)}
-                              {news.author === "BBC" &&
-                                (<Image
-                                  srcset={news.imageNews}
-                                  alt="news"
-                                  style={{ width: "50px", height: "40px" }}
-                                  />)}
-                                </td>
+                        {newsData &&
+                          newses &&
+                          newses.map((news) => (
+                            <tr key={news._id}>
+                              <td>{news.title}</td>
+                              <td>{news.author}</td>
+                              <td>{description(news.description)}</td>
+                              <td>
+                                {" "}
+                                {news.author === "Admin" && (
+                                  <Image
+                                    src={require(`../../../../server/uploads/images/${news.imageNews}`)}
+                                    alt="news"
+                                    style={{ width: "50px", height: "40px" }}
+                                  />
+                                )}
+                                {news.author === "United nations" && (
+                                  <Image
+                                    src={news.imageNews}
+                                    alt="news"
+                                    style={{ width: "50px", height: "40px" }}
+                                  />
+                                )}
+                                {news.author === "BBC" && (
+                                  <Image
+                                    srcset={news.imageNews}
+                                    alt="news"
+                                    style={{ width: "50px", height: "40px" }}
+                                  />
+                                )}
+                              </td>
 
-
-                            <td>
-                              <Button class="btn_1" onClick={() => handleViewNews(news._id)} >View Details</Button>
-                            </td>
-
-
-
-                          </tr>
-
-                        ))}
-
+                              <td>
+                                <Button
+                                  class="btn_1"
+                                  onClick={() => handleViewNews(news._id)}
+                                >
+                                  View Details
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>

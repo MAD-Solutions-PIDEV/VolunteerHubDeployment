@@ -15,7 +15,7 @@ const OrganizationItem = ({ organization }) => {
       <div className="team-item mt-30">
         <div className="team-thumb">
           <Image
-            src={`http://localhost:4000/uploads/${organization.logo}`}
+            src={`https://volunteerhub-backend.onrender.com/uploads/${organization.logo}`}
             alt="orgLogo"
             fluid
             style={imageStyle}

@@ -76,7 +76,7 @@ const BlogDetailsMain = () => {
 
   function FetchComments(id) {
     // Retrive Comments list
-    fetch(`http://localhost:4000/comment/${id}`)
+    fetch(`https://volunteerhub-backend.onrender.com/comment/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setComments(data);
@@ -88,7 +88,7 @@ const BlogDetailsMain = () => {
   useEffect(() => {
     if (!initialized) {
       initialized = true;
-      fetch(`http://localhost:4000/event/${id}`)
+      fetch(`https://volunteerhub-backend.onrender.com/event/${id}`)
         .then((response) => response.json())
         .then((data) => setEvent(data))
         .catch((error) => console.error(error));
@@ -201,7 +201,7 @@ const BlogDetailsMain = () => {
         <div className="blog-details__main">
           <div className="blog-details__image">
             <Image
-              src={`http://localhost:4000/uploads/${event.image}`}
+              src={`https://volunteerhub-backend.onrender.com/uploads/${event.image}`}
               alt=""
               fluid
             />
@@ -243,7 +243,7 @@ const BlogDetailsMain = () => {
         <div className="blog-author">
           <div className="blog-author__image">
             <Image
-              src={`http://localhost:4000/uploads/${
+              src={`https://volunteerhub-backend.onrender.com/uploads/${
                 event ? event.organization?.logo : "Loading..."
               }`}
               alt={event ? event.organization?.name : "Loading..."}
@@ -261,7 +261,7 @@ const BlogDetailsMain = () => {
           </h3>
           {comments.map((comment) => {
             const imageSource = comment.user.image
-              ? `http://localhost:4000/uploads/${comment.user.image}`
+              ? `https://volunteerhub-backend.onrender.com/uploads/${comment.user.image}`
               : comment.user.gender === "male"
               ? "assets/img/avatar/men.png"
               : "assets/img/avatar/women.png";
@@ -416,7 +416,7 @@ const BlogDetailsMain = () => {
                             {sdgs.map((sdg, index) => (
                               <td style={{ padding: "0 15px" }} key={index}>
                                 <Image
-                                  src={`http://localhost:4000/uploads/sdgs/${sdg.trim()}.png`}
+                                  src={`https://volunteerhub-backend.onrender.com/uploads/sdgs/${sdg.trim()}.png`}
                                   alt={sdg.trim()}
                                 />
                               </td>

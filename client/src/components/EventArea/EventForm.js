@@ -6,13 +6,13 @@ import Title from "components/Reuseable/Title";
 import axios from "axios";
 import styles from "./style.module.css";
 import classNames from "classnames";
-import Select from 'react-select';
+import Select from "react-select";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng
+  getLatLng,
 } from "react-places-autocomplete";
 import EventService from "services/event.service";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
@@ -31,7 +31,7 @@ const customStyles = {
     color: "#838694",
     fontWeight: 400,
     fontSize: "16px",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   }),
   option: (provided, state) => ({
     ...provided,
@@ -40,119 +40,133 @@ const customStyles = {
     padding: "10px 20px",
     fontSize: "16px",
     textTransform: "capitalize",
-    cursor: "pointer"
+    cursor: "pointer",
   }),
   singleValue: (provided) => ({
     ...provided,
     color: "#838694",
     fontWeight: 400,
     fontSize: "16px",
-    textTransform: "capitalize"
-  })
+    textTransform: "capitalize",
+  }),
 };
 
 const SDGList = [
   {
-    value: 'SDG1',
-    label: 'No Poverty',
-    description: 'End poverty in all its forms everywhere',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/Goal%201%20Box%20fr.png'
+    value: "SDG1",
+    label: "No Poverty",
+    description: "End poverty in all its forms everywhere",
+    image:
+      "https://sdgs.un.org/sites/default/files/2020-10/Goal%201%20Box%20fr.png",
   },
   {
-    value: 'SDG2',
-    label: 'Zero Hunger',
-    description: 'End hunger, achieve food security and improved nutrition and promote sustainable agriculture',
-    image: '	https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-02.png'
+    value: "SDG2",
+    label: "Zero Hunger",
+    description:
+      "End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
+    image: "	https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-02.png",
   },
   {
-    value: 'SDG3',
-    label: 'Good Health and Well-being',
-    description: 'Ensure healthy lives and promote well-being for all at all ages',
-    image: '	https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-03.png'
+    value: "SDG3",
+    label: "Good Health and Well-being",
+    description:
+      "Ensure healthy lives and promote well-being for all at all ages",
+    image: "	https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-03.png",
   },
   {
-    value: 'SDG4',
-    label: 'Quality Education',
-    description: 'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-04.png'
+    value: "SDG4",
+    label: "Quality Education",
+    description:
+      "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-04.png",
   },
   {
-    value: 'SDG5',
-    label: 'Gender Equality',
-    description: 'Achieve gender equality and empower all women and girls',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-05.jpg'
+    value: "SDG5",
+    label: "Gender Equality",
+    description: "Achieve gender equality and empower all women and girls",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-05.jpg",
   },
   {
-    value: 'SDG6',
-    label: 'Clean Water and Sanitation',
-    description: 'Ensure availability and sustainable management of water and sanitation for all',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-06.png'
+    value: "SDG6",
+    label: "Clean Water and Sanitation",
+    description:
+      "Ensure availability and sustainable management of water and sanitation for all",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-06.png",
   },
   {
-    value: 'SDG7',
-    label: 'Affordable and Clean Energy',
-    description: 'Ensure access to affordable, reliable, sustainable and modern energy for all',
-    image: '	https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-07.jpg'
+    value: "SDG7",
+    label: "Affordable and Clean Energy",
+    description:
+      "Ensure access to affordable, reliable, sustainable and modern energy for all",
+    image: "	https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-07.jpg",
   },
   {
-    value: 'SDG8',
-    label: 'Decent Work and Economic Growth',
-    description: 'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-08.jpg'
+    value: "SDG8",
+    label: "Decent Work and Economic Growth",
+    description:
+      "Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-08.jpg",
   },
   {
-    value: 'SDG9',
-    label: 'Industry, Innovation and Infrastructure',
-    description: 'Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation',
-    image: '	https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-09.jpg'
+    value: "SDG9",
+    label: "Industry, Innovation and Infrastructure",
+    description:
+      "Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation",
+    image: "	https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-09.jpg",
   },
   {
-    value: 'SDG10',
-    label: 'Reduced Inequalities',
-    description: 'Reduce inequality within and among countries',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-10.png'
+    value: "SDG10",
+    label: "Reduced Inequalities",
+    description: "Reduce inequality within and among countries",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-10.png",
   },
   {
-    value: 'SDG11',
-    label: 'Sustainable Cities and Communities',
-    description: 'Make cities and human settlements inclusive, safe, resilient and sustainable',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-11.jpg'
+    value: "SDG11",
+    label: "Sustainable Cities and Communities",
+    description:
+      "Make cities and human settlements inclusive, safe, resilient and sustainable",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F_SDG_PRINT-11.jpg",
   },
   {
-    value: 'SDG12',
-    label: 'Responsible Consumption and Production',
-    description: 'Ensure sustainable consumption and production patterns',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-12_0.png'
+    value: "SDG12",
+    label: "Responsible Consumption and Production",
+    description: "Ensure sustainable consumption and production patterns",
+    image:
+      "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-12_0.png",
   },
   {
-    value: 'SDG13',
-    label: 'Climate Action',
-    description: 'Take urgent action to combat climate change and its impacts',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-13.png'
+    value: "SDG13",
+    label: "Climate Action",
+    description: "Take urgent action to combat climate change and its impacts",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-13.png",
   },
   {
-    value: 'SDG14',
-    label: 'Life Below Water',
-    description: 'Conserve and sustainably use the oceans, seas and marine resources for sustainable development',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-14.png'
+    value: "SDG14",
+    label: "Life Below Water",
+    description:
+      "Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-14.png",
   },
   {
-    value: 'SDG15',
-    label: 'Life on Land',
-    description: 'Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-15.png'
+    value: "SDG15",
+    label: "Life on Land",
+    description:
+      "Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-15.png",
   },
   {
-    value: 'SDG16',
-    label: 'Peace, Justice and Strong Institutions',
-    description: 'Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-16.png'
+    value: "SDG16",
+    label: "Peace, Justice and Strong Institutions",
+    description:
+      "Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-16.png",
   },
   {
-    value: 'SDG17',
-    label: 'Partnerships for the Goals',
-    description: 'Strengthen the means of implementation and revitalize the global partnership for sustainable development',
-    image: 'https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-17.png'
+    value: "SDG17",
+    label: "Partnerships for the Goals",
+    description:
+      "Strengthen the means of implementation and revitalize the global partnership for sustainable development",
+    image: "https://sdgs.un.org/sites/default/files/2020-10/F-WEB-Goal-17.png",
   },
 ];
 
@@ -164,44 +178,48 @@ const validationSchema = yup.object().shape({
     .required("Description is required")
     .min(10, "Description must be at least 10 characters")
     .max(1000, "Description must be at most 1000 characters"),
-  startDate: yup.date()
-    .required('Start date is required')
-    .min(new Date(), 'Start date must be in the future'),
-  endDate: yup.date()
-    .required('End date is required')
-    .min(yup.ref('startDate'), 'End date must be after start date')
+  startDate: yup
+    .date()
+    .required("Start date is required")
+    .min(new Date(), "Start date must be in the future"),
+  endDate: yup
+    .date()
+    .required("End date is required")
+    .min(yup.ref("startDate"), "End date must be after start date")
     .test(
-      'is-same-day-or-later',
-      'End date must be the same day or a later day than start date',
+      "is-same-day-or-later",
+      "End date must be the same day or a later day than start date",
       function (value) {
-        const startDate = this.resolve(yup.ref('startDate'));
+        const startDate = this.resolve(yup.ref("startDate"));
         if (!startDate || !value) {
           return true;
         }
         return startDate <= value;
       }
     ),
-  startTime: yup.string().required('Start time is required'),
-  endTime: yup.string().required('End time is required'),
-  org: yup.string().required('Organization is required'),
-  country: yup.string().required('Country is required'),
-  sdgs: yup.string().required('please select causes'),
+  startTime: yup.string().required("Start time is required"),
+  endTime: yup.string().required("End time is required"),
+  org: yup.string().required("Organization is required"),
+  country: yup.string().required("Country is required"),
+  sdgs: yup.string().required("please select causes"),
   city: yup.string().required("city is required"),
-  image: yup.mixed().required('Please select an image'),
-  lat: yup.mixed().required('Drag marker on map'),
-  status: yup.string()
-    .oneOf(['public', 'private'], 'Please select a valid status')
-    .required('Please select a status'),
-    nbParticipant: yup.number()
+  image: yup.mixed().required("Please select an image"),
+  lat: yup.mixed().required("Drag marker on map"),
+  status: yup
+    .string()
+    .oneOf(["public", "private"], "Please select a valid status")
+    .required("Please select a status"),
+  nbParticipant: yup
+    .number()
     .positive("Number participants must be a positive number")
     .required("Number participants is required"),
-  subscribe: yup.string()
-    .oneOf(['paid', 'free'], 'Please select a valid subscribe')
-    .required('Please select a Payment method'),
-})
+  subscribe: yup
+    .string()
+    .oneOf(["paid", "free"], "Please select a valid subscribe")
+    .required("Please select a Payment method"),
+});
 
 const EventForm = () => {
-
   let navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [organizations, setOrganizations] = useState([]);
@@ -215,13 +233,13 @@ const EventForm = () => {
 
   const onSubmit = async (data, event) => {
     event.preventDefault();
-    setDescription(editorState.getCurrentContent().getPlainText())
-    console.log(data.subscribe)
+    setDescription(editorState.getCurrentContent().getPlainText());
+    console.log(data.subscribe);
     // Validate the form befor submiting
     try {
       // Capture selected sdgs
-      let sdgs = selectedSDGs.map(option => option.value);
-      let sdg = sdgs[0]
+      let sdgs = selectedSDGs.map((option) => option.value);
+      let sdg = sdgs[0];
       await validationSchema.validate(
         {
           name: data.name,
@@ -243,7 +261,7 @@ const EventForm = () => {
         { abortEarly: false } // Validate all fields and return all errors
       );
 
-      // Call Service 
+      // Call Service
       EventService.create(
         data.name,
         editorState.getCurrentContent().getPlainText(),
@@ -259,9 +277,8 @@ const EventForm = () => {
         longitude,
         selectedOrg.orgId,
         data.nbParticipant,
-        data.price||0,
-        data.subscribe,
-        
+        data.price || 0,
+        data.subscribe
       ).then(
         (eventIdd) => {
           navigate(`/event?id=${eventIdd}`);
@@ -275,7 +292,7 @@ const EventForm = () => {
             error.toString();
           setMessage(resMessage);
           setSuccessfulEvent(false);
-          console.log(successfulEvent)
+          console.log(successfulEvent);
         }
       );
     } catch (err) {
@@ -283,11 +300,11 @@ const EventForm = () => {
       const errors = {};
       err.inner.forEach((e) => (errors[e.path] = e.message));
       setFormErrors(errors);
-      console.log(err.errors[0])
-      setInvalid(errors.message)
+      console.log(err.errors[0]);
+      setInvalid(errors.message);
     }
-  }
-  
+  };
+
   const select = classNames(styles.select);
   const tag = classNames(styles.tag);
   const [tags, setTags] = useState([]);
@@ -300,7 +317,9 @@ const EventForm = () => {
   const [messageEvent, setMessageEvent] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(process.env.PUBLIC_URL + "/assets/img/blank.png");
+  const [imagePreview, setImagePreview] = useState(
+    process.env.PUBLIC_URL + "/assets/img/blank.png"
+  );
   const [selectedSDGs, setSelectedSDGs] = useState([]);
   const [address, setAddress] = React.useState("");
   const [city, setCity] = useState("");
@@ -310,14 +329,14 @@ const EventForm = () => {
   const [wallet, setWallet] = useState(null);
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
-    lng: null
+    lng: null,
   });
-  const [selectedOrg, setSelectedOrg] = useState('');
+  const [selectedOrg, setSelectedOrg] = useState("");
   const [formErrors, setFormErrors] = useState({});
-  const [org, setOrg] = useState('');
-  const [country, setCountry] = useState('');
+  const [org, setOrg] = useState("");
+  const [country, setCountry] = useState("");
   const [isSubscribe, setIsSubscribe] = useState(false);
-  const [currencySymbol, setCurrencySymbol] = useState('$');
+  const [currencySymbol, setCurrencySymbol] = useState("$");
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -338,31 +357,31 @@ const EventForm = () => {
 
   const handleStateChange = (event) => {
     setCountry(event.target.value);
-    console.log(country)
+    console.log(country);
     validationSchema
       .validateAt("country", { country: event.target.value })
       .then(() => setFormErrors((prevErrors) => ({ ...prevErrors, state: "" })))
       .catch((error) =>
         setFormErrors((prevErrors) => ({ ...prevErrors, state: error.message }))
       );
-      console.log(event.target.value)
-      switch (event.target.value) {
-        case 'US':
-          setCurrencySymbol('$');
-          break;
-        case 'UK':
-          setCurrencySymbol('£');
-          break;
-        case 'EU':
-          setCurrencySymbol('€');
-          break;
-        case 'FR':
-          setCurrencySymbol('€');
-          break;
-        // Add cases for other countries as needed
-        default:
-          setCurrencySymbol('$');
-      }
+    console.log(event.target.value);
+    switch (event.target.value) {
+      case "US":
+        setCurrencySymbol("$");
+        break;
+      case "UK":
+        setCurrencySymbol("£");
+        break;
+      case "EU":
+        setCurrencySymbol("€");
+        break;
+      case "FR":
+        setCurrencySymbol("€");
+        break;
+      // Add cases for other countries as needed
+      default:
+        setCurrencySymbol("$");
+    }
   };
 
   const handleInputChange = (event) => {
@@ -377,26 +396,27 @@ const EventForm = () => {
     reader.readAsDataURL(file);
   };
 
-
   const handleSelectChange = (selectedOption) => {
     setSelectedCountry(selectedOption.label);
-    console.log(selectedCountry)
+    console.log(selectedCountry);
   };
 
   const handleSubscribeChange = (event) => {
-    if(selectedOrg.orgId){
-      if(wallet){
-        setIsSubscribe(event.target.value === "paid")
-      }else{
-        setIsSubscribe(false)
-        alert("Your organization should have a wallet address to ensure transactions.!")
+    if (selectedOrg.orgId) {
+      if (wallet) {
+        setIsSubscribe(event.target.value === "paid");
+      } else {
+        setIsSubscribe(false);
+        alert(
+          "Your organization should have a wallet address to ensure transactions.!"
+        );
       }
-    }else{
-      alert("Please select an Organization!")
+    } else {
+      alert("Please select an Organization!");
     }
   };
 
-  const handleSelect = async value => {
+  const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
@@ -405,7 +425,6 @@ const EventForm = () => {
 
   function handleSDGSelect(selectedOptions) {
     setSelectedSDGs(selectedOptions);
-
   }
 
   useEffect(() => {
@@ -429,7 +448,7 @@ const EventForm = () => {
     });
 
     // Add click event listener to marker
-    google.maps.event.addListener(marker, 'dragend', function (event) {
+    google.maps.event.addListener(marker, "dragend", function (event) {
       setLatitude(event.latLng.lat());
       setLongitude(event.latLng.lng());
     });
@@ -440,7 +459,9 @@ const EventForm = () => {
       event.preventDefault();
       const google = window.google;
 
-      fetch(`https://nominatim.openstreetmap.org/search?city=${city}&format=json`)
+      fetch(
+        `https://nominatim.openstreetmap.org/search?city=${city}&format=json`
+      )
         .then((response) => response.json())
         .then((data) => {
           const lat = data[0].lat;
@@ -469,16 +490,21 @@ const EventForm = () => {
 
   useEffect(() => {
     async function fetchCities() {
-      axios.get(`http://api.openweathermap.org/data/2.5/find?q=tunisia&type=like&sort=population&appid=a423008808d021cced1573c3489aabf6`)
-        .then(response => setCities(response.data.list));
-    } fetchCities();
-  },
-    []);
+      axios
+        .get(
+          `http://api.openweathermap.org/data/2.5/find?q=tunisia&type=like&sort=population&appid=a423008808d021cced1573c3489aabf6`
+        )
+        .then((response) => setCities(response.data.list));
+    }
+    fetchCities();
+  }, []);
 
   useEffect(() => {
     async function fetchOrg() {
       if (user) {
-        const response = await axios.get(`http://localhost:4000/org/${user.id}`);
+        const response = await axios.get(
+          `https://volunteerhub-backend.onrender.com/org/${user.id}`
+        );
         setOrganizations(response.data.organizations);
       }
     }
@@ -487,13 +513,12 @@ const EventForm = () => {
 
   function handleSelectOrganization(selectedOption) {
     setSelectedOrg(selectedOption);
-    setOrg(selectedOption.label)
-    setWallet(selectedOption.wallet)
+    setOrg(selectedOption.label);
+    setWallet(selectedOption.wallet);
   }
   useEffect(() => {
     console.log(selectedOrg);
   }, [selectedOrg]);
-
 
   useEffect(() => {
     console.log(country);
@@ -504,7 +529,7 @@ const EventForm = () => {
       <section
         className="page-title-area bg_cover"
         style={{
-          backgroundImage: `url(${require("assets/images/page-title-bg.jpg")})`
+          backgroundImage: `url(${require("assets/images/page-title-bg.jpg")})`,
         }}
       >
         <Container>
@@ -514,17 +539,16 @@ const EventForm = () => {
                 <h3 className="title">Create Event</h3>
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                    </li>
+                    <li className="breadcrumb-item"></li>
                     <li className="breadcrumb-item " aria-current="page">
                       <label>Your organization(s) : </label>
                       <Select
                         value={selectedOrg}
                         onChange={handleSelectOrganization}
-                        options={organizations.map(org => ({
+                        options={organizations.map((org) => ({
                           label: org.name,
                           orgId: org._id,
-                          wallet:org.wallet
+                          wallet: org.wallet,
                         }))}
                         isClearable
                         isSearchable
@@ -555,17 +579,12 @@ const EventForm = () => {
                 <div className="conact-form-item">
                   <Row>
                     <Col lg={6}>
-                      <div className="input-box mt-20">
-                      </div>
+                      <div className="input-box mt-20"></div>
                     </Col>
                   </Row>
                   <Col>
                     <div className="input-box mt-20">
-                      <input
-                        type="text"
-                        placeholder="Event Name"
-                        name="name"
-                      />
+                      <input type="text" placeholder="Event Name" name="name" />
                     </div>
                     {formErrors.name && (
                       <div className="text-danger">{formErrors.name}</div>
@@ -579,11 +598,13 @@ const EventForm = () => {
                       />
                     </div>
                     {formErrors.description && (
-                      <div className="text-danger">{formErrors.description}</div>
+                      <div className="text-danger">
+                        {formErrors.description}
+                      </div>
                     )}
                   </Col>
                   <Row>
-                    <Col >
+                    <Col>
                       <div className="input-box mt-20">
                         <label>
                           Start date
@@ -596,10 +617,12 @@ const EventForm = () => {
                         </label>
                       </div>
                       {formErrors.startDate && (
-                        <div className="text-danger">{formErrors.startDate}</div>
+                        <div className="text-danger">
+                          {formErrors.startDate}
+                        </div>
                       )}
                     </Col>
-                    <Col >
+                    <Col>
                       <div className="input-box mt-20">
                         <label>
                           Start at
@@ -612,12 +635,14 @@ const EventForm = () => {
                         </label>
                       </div>
                       {formErrors.startTime && (
-                        <div className="text-danger">{formErrors.startTime}</div>
+                        <div className="text-danger">
+                          {formErrors.startTime}
+                        </div>
                       )}
                     </Col>
                   </Row>
                   <Row>
-                    <Col >
+                    <Col>
                       <div className="input-box mt-20">
                         <label>
                           End date
@@ -633,7 +658,7 @@ const EventForm = () => {
                         <div className="text-danger">{formErrors.endDate}</div>
                       )}
                     </Col>
-                    <Col >
+                    <Col>
                       <div className="input-box mt-20">
                         <label>
                           End at
@@ -652,21 +677,27 @@ const EventForm = () => {
                   </Row>
                   <Row>
                     <Col lg={6}>
-                      <label style={{
-                        position: "relative",
-                        top: "1.1rem"
-                      }}>Country</label>
+                      <label
+                        style={{
+                          position: "relative",
+                          top: "1.1rem",
+                        }}
+                      >
+                        Country
+                      </label>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         {country && (
-                          <img style={{
-                            position: "relative",
-                            top: "0.6rem",
-                            height: "4.39rem",
-                            marginRight: "0px",
-                            width: "3.5rem"
-                          }}
+                          <img
+                            style={{
+                              position: "relative",
+                              top: "0.6rem",
+                              height: "4.39rem",
+                              marginRight: "0px",
+                              width: "3.5rem",
+                            }}
                             src={
-                              countries.find((c) => c.alpha2Code === country).flag
+                              countries.find((c) => c.alpha2Code === country)
+                                .flag
                             }
                             alt="Selected country flag"
                           />
@@ -728,7 +759,10 @@ const EventForm = () => {
                   </Row>
                   <Row>
                     <div className="input-box mt-20">
-                      <div ref={mapRef} style={{ width: '100%', height: '400px' }} />
+                      <div
+                        ref={mapRef}
+                        style={{ width: "100%", height: "400px" }}
+                      />
                       {formErrors.lat && (
                         <div className="text-danger">{formErrors.lat}</div>
                       )}
@@ -744,13 +778,25 @@ const EventForm = () => {
                           onChange={handleSDGSelect}
                           isMulti
                           placeholder="Select SDG(s)"
-                          getOptionLabel={(option) => `${option.label} - ${option.description}`}
+                          getOptionLabel={(option) =>
+                            `${option.label} - ${option.description}`
+                          }
                           getOptionValue={(option) => option.value}
-                          formatOptionLabel={({ label, description, image }) => (
+                          formatOptionLabel={({
+                            label,
+                            description,
+                            image,
+                          }) => (
                             <div>
-                              <img src={image} alt={label} style={{ width: '50px', marginRight: '10px' }} />
-                              <div style={{ display: 'inline-block' }}>
-                                <div style={{ fontWeight: 'bold' }}>{label}</div>
+                              <img
+                                src={image}
+                                alt={label}
+                                style={{ width: "50px", marginRight: "10px" }}
+                              />
+                              <div style={{ display: "inline-block" }}>
+                                <div style={{ fontWeight: "bold" }}>
+                                  {label}
+                                </div>
                               </div>
                             </div>
                           )}
@@ -761,23 +807,27 @@ const EventForm = () => {
                       )}
                     </Col>
                     <Col lg={6}>
-                      <div className="input-box mt-20" >
+                      <div className="input-box mt-20">
                         <label>Privacy</label>
-                        <div style={{
-                          display: "flex",
-                          fontSize: "30px",
-                          top: "14px",
-                          position: "relative"
-                        }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            fontSize: "30px",
+                            top: "14px",
+                            position: "relative",
+                          }}
+                        >
                           Private
-                          <input align="right"
+                          <input
+                            align="right"
                             type="radio"
                             name="status"
                             value="private"
                             data-icon=""
                             style={{ backgroundColor: "#ffffff00" }}
                           />
-                          Public <input
+                          Public{" "}
+                          <input
                             type="radio"
                             name="status"
                             value="public"
@@ -792,23 +842,27 @@ const EventForm = () => {
                     </Col>
                   </Row>
                   <Row>
-                  <Col lg={6}>
-                  <div className="input-box mt-20">
-                    <label>
-                      Choose an image:
-                      <input type="file" onChange={handleInputChange} />
-                    </label>
-                    <img align="center" src={imagePreview} alt="Selected Image" width="500"
-                      style={{
-                        position: "relative",
-                        left: "10%"
-                      }}
-                    />
-                  </div>
-                  {formErrors.image && (
-                    <div className="text-danger">{formErrors.image}</div>
-                  )}
-                  </Col>
+                    <Col lg={6}>
+                      <div className="input-box mt-20">
+                        <label>
+                          Choose an image:
+                          <input type="file" onChange={handleInputChange} />
+                        </label>
+                        <img
+                          align="center"
+                          src={imagePreview}
+                          alt="Selected Image"
+                          width="500"
+                          style={{
+                            position: "relative",
+                            left: "10%",
+                          }}
+                        />
+                      </div>
+                      {formErrors.image && (
+                        <div className="text-danger">{formErrors.image}</div>
+                      )}
+                    </Col>
                     <Col lg={6}>
                       <div className="input-box mt-20">
                         <label>
@@ -824,21 +878,24 @@ const EventForm = () => {
                       </div>
                     </Col>
                   </Row>
-                 <Row>
+                  <Row>
                     <Col>
-                      <div className="input-box mt-20" >
+                      <div className="input-box mt-20">
                         <table>
                           <tr>
                             <td>
                               <label>Privacy</label>
-                              <div style={{
-                                display: "flex",
-                                fontSize: "30px",
-                                top: "14px",
-                                position: "relative",
-                              }}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  fontSize: "30px",
+                                  top: "14px",
+                                  position: "relative",
+                                }}
+                              >
                                 Free
-                                <input align="right"
+                                <input
+                                  align="right"
                                   type="radio"
                                   name="subscribe"
                                   value="free"
@@ -846,7 +903,8 @@ const EventForm = () => {
                                   onChange={handleSubscribeChange}
                                   style={{ backgroundColor: "#ffffff00" }}
                                 />
-                                Paid <input
+                                Paid{" "}
+                                <input
                                   type="radio"
                                   name="subscribe"
                                   value="paid"
@@ -860,17 +918,24 @@ const EventForm = () => {
                               {isSubscribe && (
                                 <div>
                                   <label htmlFor="price">Price:</label>
-                                  
-                                  <input style={{ width: "26.7rem" }}
+
+                                  <input
+                                    style={{ width: "26.7rem" }}
                                     min="0"
                                     type="number"
                                     placeholder="Enter amount"
                                     name="price"
-                                    id="id" />
-                                    <span style={{fontSize:"1.8rem",
-                                                  position:"relative",
-                                                  top:"0.4rem"}}>
-                                    {currencySymbol}</span>
+                                    id="id"
+                                  />
+                                  <span
+                                    style={{
+                                      fontSize: "1.8rem",
+                                      position: "relative",
+                                      top: "0.4rem",
+                                    }}
+                                  >
+                                    {currencySymbol}
+                                  </span>
                                 </div>
                               )}
                             </td>
@@ -878,25 +943,29 @@ const EventForm = () => {
                           <tr>
                             <td>
                               {formErrors.subscribe && (
-                                <div className="text-danger">{formErrors.subscribe}</div>
+                                <div className="text-danger">
+                                  {formErrors.subscribe}
+                                </div>
                               )}
                             </td>
-                            <td>
-                            </td>
+                            <td></td>
                           </tr>
                         </table>
                       </div>
                     </Col>
-                  </Row> 
+                  </Row>
                   <Col lg={12}>
                     <div className="input-box mt-20 text-center">
-                      <button className="main-btn" type="submit" onSubmit={handleSubmit(onSubmit)}  >
+                      <button
+                        className="main-btn"
+                        type="submit"
+                        onSubmit={handleSubmit(onSubmit)}
+                      >
                         CREATE
                       </button>
                       {successfulEvent && (
                         <div className="form-group">
-                          <div
-                            className="alert alert-success">pass</div>
+                          <div className="alert alert-success">pass</div>
                         </div>
                       )}
                     </div>
@@ -909,7 +978,6 @@ const EventForm = () => {
       </section>
     </>
   );
-
 };
 
 export default EventForm;

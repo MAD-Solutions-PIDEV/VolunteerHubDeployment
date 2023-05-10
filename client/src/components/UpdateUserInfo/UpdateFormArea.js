@@ -1,9 +1,11 @@
-
 import handleSubmit from "utils/handleSubmit";
-import React ,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { exploreskills } from "data/UpdateArea";
 
-import { updateUser, getUserById } from "../../BackEnd/Modules/services/userService";
+import {
+  updateUser,
+  getUserById,
+} from "../../BackEnd/Modules/services/userService";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import Title from "../Reuseable/Title";
@@ -17,15 +19,16 @@ function NotificationBar({ message }) {
   ) : null;
 }
 function sendNotification(newPhone) {
-  axios.post('http://localhost:4000/sms/sendNotification', {
-    phone: newPhone
-  })
-  .then(response => {
-    console.log('SMS notification sent');
-  })
-  .catch(error => {
-    console.error('Error sending SMS notification:', error);
-  });
+  axios
+    .post("https://volunteerhub-backend.onrender.com/sms/sendNotification", {
+      phone: newPhone,
+    })
+    .then((response) => {
+      console.log("SMS notification sent");
+    })
+    .catch((error) => {
+      console.error("Error sending SMS notification:", error);
+    });
 }
 function UpdateFormArea() {
   const { id } = useParams();
@@ -44,14 +47,14 @@ function UpdateFormArea() {
   const [country, setCountry] = useState("");
   const [languageSpoken, setlanguageSpoken] = useState({
     language: "",
-    level: ""
-});
+    level: "",
+  });
 
-const [level, setLevel] = useState("");
-const [language, setlanguage] = useState("");
-const [languages, setLanguages] = useState([]);
+  const [level, setLevel] = useState("");
+  const [language, setlanguage] = useState("");
+  const [languages, setLanguages] = useState([]);
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
   const { skill } = exploreskills;
 
@@ -64,7 +67,7 @@ const [languages, setLanguages] = useState([]);
     zipCode: "",
     state: "",
   });
-  
+
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
@@ -95,13 +98,15 @@ const [languages, setLanguages] = useState([]);
       .catch((error) => console.log(error));
   }, [id]);
 
-
   useEffect(() => {
     fetch("https://restcountries.com/v2/all")
       .then((response) => response.json())
       .then((data) => {
         const allLanguages = data.reduce((acc, country) => {
-          return [...acc, ...country.languages.map((language) => language.name)];
+          return [
+            ...acc,
+            ...country.languages.map((language) => language.name),
+          ];
         }, []);
         const uniqueLanguages = [...new Set(allLanguages)];
         setLanguages(uniqueLanguages);
@@ -110,58 +115,53 @@ const [languages, setLanguages] = useState([]);
         console.error("Error fetching languages:", error);
       });
   }, []);
- const handleUpdate = () => {
-   const updatedUser = {
-     email,
-     firstName,
-     lastName,
-     phone,
-     gender,
-     status,
-     image,
-     birthday,
-     password,
-     Skills,
-     languageSpoken:[
-      {
+  const handleUpdate = () => {
+    const updatedUser = {
+      email,
+      firstName,
+      lastName,
+      phone,
+      gender,
+      status,
+      image,
+      birthday,
+      password,
+      Skills,
+      languageSpoken: [
+        {
           language,
-          level
-      }
-  ],
-     address :({ firstAddress ,
-     secondAddress ,
-     country ,
-     zipCode ,
-     state }),
-     
-   };
+          level,
+        },
+      ],
+      address: { firstAddress, secondAddress, country, zipCode, state },
+    };
 
-
-
-   updateUser(id, updatedUser)
-     .then((res) => {
-       console.log(res.data);
-       const skillsSelected = [];
-       for (let i = 0; i < res.data.Skills[0].selectedList.length; i++) {
-        if (res.data.Skills[0].selectedList[i].skill) {
-          skillsSelected.push(res.data.Skills[0].selectedList[i].skill);
+    updateUser(id, updatedUser)
+      .then((res) => {
+        console.log(res.data);
+        const skillsSelected = [];
+        for (let i = 0; i < res.data.Skills[0].selectedList.length; i++) {
+          if (res.data.Skills[0].selectedList[i].skill) {
+            skillsSelected.push(res.data.Skills[0].selectedList[i].skill);
+          }
         }
-      }
-       localStorage.setItem("skills", skillsSelected);
-       window.scrollTo(0, 0);
-       if(res.data.phone) {sendNotification(res.data.phone)}
-       setNotification("Profile updated successfully"); // Set notification message on success
-     })
-     .catch((error) => {
-       console.log(error.response.data);
-       setNotification("An error occurred while updating profile"); // Set notification message on error
-     });
- };
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     handleUpdate();
-   };
-   const handleSelectionChange = (event) => {
+        localStorage.setItem("skills", skillsSelected);
+        window.scrollTo(0, 0);
+        if (res.data.phone) {
+          sendNotification(res.data.phone);
+        }
+        setNotification("Profile updated successfully"); // Set notification message on success
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setNotification("An error occurred while updating profile"); // Set notification message on error
+      });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpdate();
+  };
+  const handleSelectionChange = (event) => {
     const options = event.target.options;
     const Skills = [];
     for (let i = 0; i < options.length; i++) {
@@ -170,7 +170,7 @@ const [languages, setLanguages] = useState([]);
       }
     }
     setSkills(Skills);
-  }
+  };
 
   return (
     <>
@@ -241,7 +241,7 @@ const [languages, setLanguages] = useState([]);
                         />
                       </div>
 
-                         <div className="input-box mt-20">
+                      <div className="input-box mt-20">
                         <label htmlFor="language">Language Spoken :</label>
                         <select
                           value={language}
@@ -251,31 +251,32 @@ const [languages, setLanguages] = useState([]);
                         >
                           <option value="">Select a Language</option>
                           {languages.map((language) => (
-                            <option key={language} value={language}>{language}</option>
+                            <option key={language} value={language}>
+                              {language}
+                            </option>
                           ))}
                         </select>
                       </div>
 
                       <div className=" mt-20">
                         <label htmlFor="skills">Skills :</label>
-                    
-                      <Multiselect
+
+                        <Multiselect
                           selectedValues={Skills.skill}
                           options={exploreskills}
                           displayValue="skill"
                           onSelect={(selectedList, selectedItem) => {
                             console.log(selectedList); // check the value of selectedList
-                            setSkills({selectedList });
+                            setSkills({ selectedList });
                             console.log(Skills.SkillsRequired); // check the value of mission.SkillsRequired
                           }}
                           onRemove={(selectedList, removedItem) => {
                             console.log(selectedList); // check the value of selectedList
-                            setSkills({selectedList });
+                            setSkills({ selectedList });
                             console.log(Skills); // check the value of mission.SkillsRequired
                           }}
                           onChange={handleSelectionChange}
                         />
-
                       </div>
 
                       <div className="input-box mt-20">
@@ -328,7 +329,6 @@ const [languages, setLanguages] = useState([]);
                         <input
                           type="password"
                           placeholder="Password"
-                          
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
@@ -380,6 +380,6 @@ const [languages, setLanguages] = useState([]);
       </section>
     </>
   );
-};
+}
 
 export default UpdateFormArea;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UAParser } from "ua-parser-js";
 
-const API_URL = "http://localhost:4000/";
+const API_URL = "https://volunteerhub-backend.onrender.com/";
 
 // Save Request
 const create = (
@@ -73,7 +73,6 @@ const follow = (userId, eventId) => {
     userId,
     eventId,
   });
- 
 };
 
 const check = (userId, eventId) => {
@@ -144,7 +143,7 @@ const comment = (event, user, message) => {
 };
 
 const saveWinner = () => {
-  console.log(user.id)
+  console.log(user.id);
   getLog("winner: ", user.id);
 };
 
@@ -193,8 +192,6 @@ const getNFT = (userId) => {
   return axios.get(API_URL + `getNFT/${userId}`);
 };
 
-
-
 const EventService = {
   fetchEvents,
   create,
@@ -209,7 +206,7 @@ const EventService = {
   checkGame,
   saveWinner,
   winnerSaved,
-  getNFT
+  getNFT,
 };
 
 export default EventService;

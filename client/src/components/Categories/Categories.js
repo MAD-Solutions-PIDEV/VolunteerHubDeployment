@@ -1,21 +1,28 @@
 import Title from "components/Reuseable/Title";
 import { categoriesSection } from "data/categories";
 import React, { useEffect, useState } from "react";
-import { CardGroup, Col, Container, Image, ListGroup, Row } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
-import { format } from 'date-fns'
-import Card from 'react-bootstrap/Card';
+import {
+  CardGroup,
+  Col,
+  Container,
+  Image,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { format } from "date-fns";
+import Card from "react-bootstrap/Card";
 const { bg, tagline, title, text, categoriesUser, signIn, categories } =
   categoriesSection;
 
-const CategoriesBoxItem = ({ categories = [], mission = {}  }) => {
-  const { Title , Image ,Location,StartDate, _id} = mission;
+const CategoriesBoxItem = ({ categories = [], mission = {} }) => {
+  const { Title, Image, Location, StartDate, _id } = mission;
   const startDate = new Date(StartDate);
 
-  const formattedDate = startDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
+  const formattedDate = startDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 
   return (
@@ -34,27 +41,26 @@ const CategoriesBoxItem = ({ categories = [], mission = {}  }) => {
 };
 const SingleExchangeMission = ({ project = {}, mission = {} }) => {
   const { tagline, date, title, raised } = project;
-  const { Title , Image ,Location,StartDate, _id} = mission;
+  const { Title, Image, Location, StartDate, _id } = mission;
 
+  const startDate = new Date(StartDate);
+  const [missionData, setMissionData] = useState({
+    Title: "",
+    Category: "",
+    Description: "",
+    SkillsRequired: "",
+    LanguageRequired: "",
+    StartDate: "",
+    EndDate: "",
+    Location: "",
+    Image: null,
+  });
 
-    const startDate = new Date(StartDate);
-    const [missionData, setMissionData] = useState({
-      Title: '',
-      Category: '',
-      Description: '',
-      SkillsRequired: '',
-      LanguageRequired: '',
-      StartDate: '',
-      EndDate: '',
-      Location: '',
-      Image:null,
-    });
-
-    const formattedDate = startDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
+  const formattedDate = startDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   // const importAll = (r) => {
   //   let images = {};
@@ -62,17 +68,18 @@ const SingleExchangeMission = ({ project = {}, mission = {} }) => {
   //   return images;
   // };
   //  const images = importAll(require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/));
- 
 };
-const Categories = (mission= {}) => {
+const Categories = (mission = {}) => {
   const [missions, setMissions] = useState([]);
-  const { _id} = mission;
+  const { _id } = mission;
 
   useEffect(() => {
     async function fetchMissions() {
       try {
-       const skillsList = localStorage.getItem("skills"); 
-        const response = await fetch(`http://localhost:4000/missions/search/skill?skills=${skillsList}`);
+        const skillsList = localStorage.getItem("skills");
+        const response = await fetch(
+          `https://volunteerhub-backend.onrender.com/missions/search/skill?skills=${skillsList}`
+        );
         const data = await response.json();
         setMissions(data);
       } catch (error) {
@@ -82,14 +89,14 @@ const Categories = (mission= {}) => {
 
     fetchMissions();
   }, []);
-  const skillsList = localStorage.getItem("skills"); 
-  
+  const skillsList = localStorage.getItem("skills");
+
   return (
     <section
       className="categories-area bg_cover"
-      style={{ 
-        backgroundImage: `url(${bg})`
-       }}
+      style={{
+        backgroundImage: `url(${bg})`,
+      }}
     >
       <Container>
         <Row className="align-items-center">
@@ -102,7 +109,7 @@ const Categories = (mission= {}) => {
                 <div className="">
                   <Image />
                 </div>
-                <Image/>
+                <Image />
               </div>
             </div>
           </Col>
@@ -114,48 +121,45 @@ const Categories = (mission= {}) => {
           </Col>
         </Row>
       </Container>
-      
 
       <Container className="mt-100">
-      
-      {skillsList ? (
-      <>
-        <h3 className="categories-content mb-50">
-          <i class="fa-regular fa-solid fa-heart"></i> Recommended Missions for you
+        {skillsList ? (
+          <>
+            <h3 className="categories-content mb-50">
+              <i class="fa-regular fa-solid fa-heart"></i> Recommended Missions
+              for you
+            </h3>
 
-        </h3>
-        
-        
-     <Row xs={1} md={3} className="g-4">
-      
-      {missions.map((mission)=> (
-        <Col>
-             
-          <Card>
+            <Row xs={1} md={3} className="g-4">
+              {missions.map((mission) => (
+                <Col>
+                  <Card>
+                    <img
+                      src={`https://volunteerhub-backend.onrender.com/uploads/${Image}`}
+                      alt=""
+                    />
 
-               
-          <img src={`http://localhost:4000/uploads/${Image}`} alt="" />
-
-        
-            <Card.Body>
-              
-            <Card.Title className="text-center"> <a href=""> Category : {mission.Category} </a></Card.Title>
-            <a href={`/${mission._id}/single-mission/`}>
-              <Card.Title className="text-center">{mission.Title}</Card.Title>
-              </a>
-              <Card.Text>
-              </Card.Text>
-            </Card.Body>
-            {/* <Card.Footer className='text-muted'>{format(mission.StartDate, 'D-MM-YYYY')} - {format(mission.EndDate, 'D-MM-YYYY')}</Card.Footer> */}
-          </Card>
-        </Col>
-      ))}
-    </Row>
-    </>
-    ) : null}
-    </Container>
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        {" "}
+                        <a href=""> Category : {mission.Category} </a>
+                      </Card.Title>
+                      <a href={`/${mission._id}/single-mission/`}>
+                        <Card.Title className="text-center">
+                          {mission.Title}
+                        </Card.Title>
+                      </a>
+                      <Card.Text></Card.Text>
+                    </Card.Body>
+                    {/* <Card.Footer className='text-muted'>{format(mission.StartDate, 'D-MM-YYYY')} - {format(mission.EndDate, 'D-MM-YYYY')}</Card.Footer> */}
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </>
+        ) : null}
+      </Container>
     </section>
-    
   );
 };
 

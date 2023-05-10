@@ -15,7 +15,9 @@ function Captcha({ onCheck, selectedOption, onSelectedOptionChange }) {
 
   const handleGenerate = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/generate");
+      const response = await axios.get(
+        "https://volunteerhub-backend.onrender.com/api/generate"
+      );
       const { emojis } = response.data;
       setDescription(emojis.description);
       setOptions(emojis.options);

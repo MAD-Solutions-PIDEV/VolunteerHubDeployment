@@ -2,36 +2,41 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Title from "../Reuseable/Title";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { newdonation, newdonationPaypal ,donationPrediction} from "services/donationService";
+import {
+  newdonation,
+  newdonationPaypal,
+  donationPrediction,
+} from "services/donationService";
 import { useParams } from "react-router";
-import { getCampaignNameById,getCampaignCauseById } from "services/campaignService";
+import {
+  getCampaignNameById,
+  getCampaignCauseById,
+} from "services/campaignService";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
-
 const PaymentForm = () => {
-  function sendNotification(Phone,username,amount) {
-    axios.post("http://localhost:4000/sms/sendNotification", {
-        phone:Phone,
-        amount:amount,
-        username:username
-        
+  function sendNotification(Phone, username, amount) {
+    axios
+      .post("https://volunteerhub-backend.onrender.com/sms/sendNotification", {
+        phone: Phone,
+        amount: amount,
+        username: username,
       })
       .then((response) => {
-        console.log("SMS notification sent",response.data);
+        console.log("SMS notification sent", response.data);
       })
       .catch((error) => {
         console.error("Error sending SMS notification:", error);
       });
-    } 
-const navigate =useNavigate();
+  }
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(null);
   const [message, setMessage] = useState("");
   const [campaignName, setCampaignName] = useState("");
   const [cause, setCause] = useState("");
-  
+
   const stripe = useStripe();
   const elements = useElements();
   // const { campaignId } = useParams();
@@ -47,50 +52,49 @@ const navigate =useNavigate();
   const donation_Times = user.donationTimes;
   const birthday = user.birthday;
   const parsedBirthday = Date.parse(birthday);
-  const age = Math.floor((Date.now() - parsedBirthday) / (365.25 * 24 * 60 * 60 * 1000));
-  
- 
-console.log(user);
-console.log(birthday);
-console.log(donation_Times);
-console.log(gender);
-console.log(email);
-useEffect(() => {
-  getCampaignNameById(id)
-    .then((res) => {
-      setCampaignName(res.data);
-    })
-    .catch((error) => console.log(error));
+  const age = Math.floor(
+    (Date.now() - parsedBirthday) / (365.25 * 24 * 60 * 60 * 1000)
+  );
 
-}, []);
+  console.log(user);
+  console.log(birthday);
+  console.log(donation_Times);
+  console.log(gender);
+  console.log(email);
+  useEffect(() => {
+    getCampaignNameById(id)
+      .then((res) => {
+        setCampaignName(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
+  useEffect(() => {
+    document.title = "Donation Form"; // set new title
+    const getCampaignCause = async () => {
+      try {
+        const response = await getCampaignCauseById(id);
+        const causeData = response.data;
+        setCause(causeData);
 
-    useEffect(() => {
-      document.title = "Donation Form"; // set new title
-      const getCampaignCause = async () => {
-        try {
-          const response = await getCampaignCauseById(id);
-          const causeData = response.data;
-          setCause(causeData);
-  
-          const donor = {
-            age: age,
-            gender: gender,
-            donation_times: donation_Times,
-            donation_reason: causeData
-          };
-  
-          const res = await donationPrediction(donor);
-          const predictedAmount = Number(res.data);
-          setAmount(predictedAmount);
-          console.log(res, predictedAmount);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-  
-      getCampaignCause();
-    }, [id, age, gender, donation_Times]);
+        const donor = {
+          age: age,
+          gender: gender,
+          donation_times: donation_Times,
+          donation_reason: causeData,
+        };
+
+        const res = await donationPrediction(donor);
+        const predictedAmount = Number(res.data);
+        setAmount(predictedAmount);
+        console.log(res, predictedAmount);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getCampaignCause();
+  }, [id, age, gender, donation_Times]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,57 +104,61 @@ useEffect(() => {
     });
 
     if (!error) {
-   
-        const donation = {
-          amount,
-          donor: {
-            id: idUser,
-            username: username,
-            email: email
-          },
-          campaign: {
-            id: id,
-            
-          }
-        };
-        newdonation(donation)
-          .then((res) => {
-            console.log(res);
-            sendNotification("+21652942447",donation.donor.username,donation.amount);
-           // navigate(`/donationcampaign/${id}`);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-      } else {
-        setMessage(error.message);
-      }
-    };
-const hundlePaypalSubmit=async()=>{
-  const donation = {
-    amount,
-    donor: {
-      id: idUser,
-      username: username,
-      email: email
-    },
-    campaign: {
-      id: id,
-      
+      const donation = {
+        amount,
+        donor: {
+          id: idUser,
+          username: username,
+          email: email,
+        },
+        campaign: {
+          id: id,
+        },
+      };
+      newdonation(donation)
+        .then((res) => {
+          console.log(res);
+          sendNotification(
+            "+21652942447",
+            donation.donor.username,
+            donation.amount
+          );
+          // navigate(`/donationcampaign/${id}`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setMessage(error.message);
     }
   };
-  newdonationPaypal(donation)
-    .then((res) => {
-      console.log(res);
-      sendNotification("+21652942447",donation.donor.username,donation.amount);
+  const hundlePaypalSubmit = async () => {
+    const donation = {
+      amount,
+      donor: {
+        id: idUser,
+        username: username,
+        email: email,
+      },
+      campaign: {
+        id: id,
+      },
+    };
+    newdonationPaypal(donation)
+      .then((res) => {
+        console.log(res);
+        sendNotification(
+          "+21652942447",
+          donation.donor.username,
+          donation.amount
+        );
 
-     // navigate(`/donationcampaign/${id}`);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+        // navigate(`/donationcampaign/${id}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
       <section className="contact-form-area">
@@ -195,8 +203,20 @@ const hundlePaypalSubmit=async()=>{
                         <label htmlFor="amount" className="form-label">
                           Amount:
                         </label>
-                        <p style={{ color: '#6133FF', fontSize: '18px', fontWeight: 'bold' }}>Based on your profile information, we predict that your optimal donation amount is {amount} USD.</p>
-                        <p style={{ color: 'orange', fontSize: '16px' }}>This suggestion is completely optional, and you can enter any amount you'd like.</p>
+                        <p
+                          style={{
+                            color: "#6133FF",
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Based on your profile information, we predict that
+                          your optimal donation amount is {amount} USD.
+                        </p>
+                        <p style={{ color: "orange", fontSize: "16px" }}>
+                          This suggestion is completely optional, and you can
+                          enter any amount you'd like.
+                        </p>
 
                         <input
                           type="number"
@@ -206,13 +226,11 @@ const hundlePaypalSubmit=async()=>{
                         />
                       </div>
                       <div className="card-box mt-20">
-                        <label htmlFor="card" className="form-label">Card:</label>
-                      <CardElement />
-                    </div>
-                  
-           
-
-
+                        <label htmlFor="card" className="form-label">
+                          Card:
+                        </label>
+                        <CardElement />
+                      </div>
 
                       <Col lg={12}>
                         <div className="input-box mt-20 mt-80 text-center">
@@ -241,7 +259,7 @@ const hundlePaypalSubmit=async()=>{
                               {/* Render PayPal buttons */}
                               <PayPalButtons
                                 createOrder={(data, actions) => {
-                                 // //(event) => setAmount(event.target.value)
+                                  // //(event) => setAmount(event.target.value)
                                   // Implement your createOrder function here
                                   // You can return an order ID or an object with the order details
                                   // For example:

@@ -275,7 +275,7 @@ export const VideoBg = styled.video`
   object-fit: cover;
   background: #232a34;
 `;
-const API_URL = "http://localhost:4000/";
+const API_URL = "https://volunteerhub-backend.onrender.com/";
 
 class NewPassword {
   resetPassword(resetPasswordCode, email, password) {

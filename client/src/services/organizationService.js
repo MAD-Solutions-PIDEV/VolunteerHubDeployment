@@ -1,6 +1,6 @@
 import { getUserById } from "BackEnd/Modules/services/userService";
 import axios from "axios";
-const API_URL = "http://localhost:4000/organizations/";
+const API_URL = "https://volunteerhub-backend.onrender.com/organizations/";
 const createOrganization = async (formData) => {
   axios
     .post(API_URL + "addOrg", formData)
@@ -89,7 +89,9 @@ const blockOrganization = async (id) => {
 
 const getOrgRole = async (name) => {
   try {
-    const response = await axios.get("http://localhost:4000/api/role/" + name);
+    const response = await axios.get(
+      "https://volunteerhub-backend.onrender.com/api/role/" + name
+    );
     console.log(response.data);
     return response.data;
   } catch (error) {

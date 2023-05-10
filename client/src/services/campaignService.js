@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:4000/";
+const apiUrl = "https://volunteerhub-backend.onrender.com/";
 const token = localStorage.getItem("token");
 
 export async function getAllCompaigns() {

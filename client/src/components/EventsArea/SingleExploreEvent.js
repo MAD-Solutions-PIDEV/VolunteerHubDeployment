@@ -8,14 +8,14 @@ import EventService from "services/event.service";
 import { useNavigate } from "react-router-dom";
 import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
-const SingleExploreEvent = ({ event = {},heartColor = {} }) => {
+const SingleExploreEvent = ({ event = {}, heartColor = {} }) => {
   const slug = slugify(event.name, { lower: true }); // generate a slug from the event name
   const { image, tagline, date, title, raised } = event;
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   let navigate = useNavigate();
   const [heartColors, setHeartColors] = useState("grey");
 
-  let eventId=event._id
+  let eventId = event._id;
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
@@ -26,24 +26,24 @@ const SingleExploreEvent = ({ event = {},heartColor = {} }) => {
   // Follow / unfollow
   const handleLike = (event) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if(user){
-      console.log(eventId)
+    if (user) {
+      console.log(eventId);
       EventService.follow(user.id, eventId).then(
-      (response) => {
-        console.log(response.data)
-        if (response.data.message === "true") {
-          heartColors("red");
-        } else {
-          heartColors("grey");
+        (response) => {
+          console.log(response.data);
+          if (response.data.message === "true") {
+            heartColors("red");
+          } else {
+            heartColors("grey");
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }else{
-    navigate("/login");
-  }
+      );
+    } else {
+      navigate("/login");
+    }
   };
 
   // CountDown event
@@ -56,43 +56,49 @@ const SingleExploreEvent = ({ event = {},heartColor = {} }) => {
 
     return { days, hours, minutes, seconds };
   }
-  
+
   const imageStyle = {
-      height: '100%',
-      objectFit: 'cover'
-    };
+    height: "100%",
+    objectFit: "cover",
+  };
   return (
-    <div className="explore-projects-item mt-30" style={{height:"19rem"}}>
-      <Image style={imageStyle} src={(`http://localhost:4000/uploads/${event.image}`)} alt="" fluid  />
+    <div className="explore-projects-item mt-30" style={{ height: "19rem" }}>
+      <Image
+        style={imageStyle}
+        src={`https://volunteerhub-backend.onrender.com/uploads/${event.image}`}
+        alt=""
+        fluid
+      />
       <div className="icon">
-        
-      <a  onClick={handleLike}>
-      <i className="fa fa-heart" style={{color:heartColor}} ></i>
-    </a>
+        <a onClick={handleLike}>
+          <i className="fa fa-heart" style={{ color: heartColor }}></i>
+        </a>
       </div>
       <div className="explore-projects-content">
         <div className="item d-flex align-items-center">
-          <span>Still: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s </span>
-          <p>
-            
-          </p>
+          <span>
+            Still: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
+            {timeLeft.seconds}s{" "}
+          </span>
+          <p></p>
         </div>
         <Link href={`/event?id=${event._id}`} state={event}>
-        <h3 className="title">{event.name}</h3>
-      </Link>
+          <h3 className="title">{event.name}</h3>
+        </Link>
         <div className="projects-range">
           <div className="projects-range-content">
             <ul>
               <li>{event ? event.organization?.name : "Loading..."}</li>
-              <li> {event.startDate.substring(0, 10)} | {event.startDate.substring(11, 16)}</li>
+              <li>
+                {" "}
+                {event.startDate.substring(0, 10)} |{" "}
+                {event.startDate.substring(11, 16)}
+              </li>
             </ul>
           </div>
         </div>
       </div>
-      
-
     </div>
-    
   );
 };
 

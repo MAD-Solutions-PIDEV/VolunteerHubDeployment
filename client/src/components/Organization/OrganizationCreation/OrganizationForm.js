@@ -52,7 +52,7 @@ const OrganizationFormArea = () => {
   const checkWallet = async ({ setError, addr }) => {
     try {
       ethers.utils.getAddress(addr);
-      setError("")
+      setError("");
     } catch (err) {
       setError(err.message);
     }
@@ -60,21 +60,21 @@ const OrganizationFormArea = () => {
 
   let errorCheck = "";
   const navigate = useNavigate();
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(wallet);
     if (isWallet) {
       await checkWallet({
         setError,
-        addr: wallet
+        addr: wallet,
       });
-    }else{
-      setError("")
+    } else {
+      setError("");
     }
-    console.log("error",error)
+    console.log("error", error);
     errorCheck = error;
-    console.log("errorCheck",errorCheck)
+    console.log("errorCheck", errorCheck);
 
     // Validate the form data using Yup
     try {
@@ -113,18 +113,22 @@ const OrganizationFormArea = () => {
       formData.append("phone", phone);
       formData.append("owner", userId);
       formData.append("wallet", wallet || "");
-      if(errorCheck===""){
-      axios
-        .post("http://localhost:4000/organizations/addOrg", formData)
-        .then((res) => {
-          console.log(res.data);
-          if (res.status == "201") {
-            navigate("/organization/pending");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });}
+      if (errorCheck === "") {
+        axios
+          .post(
+            "https://volunteerhub-backend.onrender.com/organizations/addOrg",
+            formData
+          )
+          .then((res) => {
+            console.log(res.data);
+            if (res.status == "201") {
+              navigate("/organization/pending");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } catch (err) {
       // Handle the validation errors
       const errors = {};
@@ -195,8 +199,8 @@ const OrganizationFormArea = () => {
 
   const handleWalletChange = (event) => {
     setIsWallet(event.target.value === "wallet");
-    if (isWallet){
-      setError("")
+    if (isWallet) {
+      setError("");
     }
   };
 
@@ -408,18 +412,21 @@ const OrganizationFormArea = () => {
                 </Row>
                 <Row className="justify-content-center">
                   <Col>
-                    <div className="input-box mt-20" >
+                    <div className="input-box mt-20">
                       <table>
                         <tr>
                           <td>
                             <label>Wallet</label>
-                            <div style={{
-                              display: "flex",
-                              fontSize: "30px",
-                              top: "14px",
-                              position: "relative",
-                            }}>
-                              <input align="right"
+                            <div
+                              style={{
+                                display: "flex",
+                                fontSize: "30px",
+                                top: "14px",
+                                position: "relative",
+                              }}
+                            >
+                              <input
+                                align="right"
                                 type="radio"
                                 name="wallet"
                                 value="nowallet"
@@ -437,47 +444,70 @@ const OrganizationFormArea = () => {
                               />
                             </div>
                           </td>
-                          <td style={{
-                            height: "50px",
-                            verticalAlign: "bottom"
-                          }}
-                          align="right">
-                          {isWallet && (
-                            <>
-                              <label htmlFor="price"></label>
-                              <input style={{ width: "18.5rem" }}
-                                type="text"
-                                placeholder="Wallet Address"
-                                name="addr"
-                                onChange={(e) => {
-                                  setWallet(e.target.value);
-                                  setError("")
-                                  handleStateChange(e);
-                                }}
-                              />
-                            </>
-                          )}
+                          <td
+                            style={{
+                              height: "50px",
+                              verticalAlign: "bottom",
+                            }}
+                            align="right"
+                          >
+                            {isWallet && (
+                              <>
+                                <label htmlFor="price"></label>
+                                <input
+                                  style={{ width: "18.5rem" }}
+                                  type="text"
+                                  placeholder="Wallet Address"
+                                  name="addr"
+                                  onChange={(e) => {
+                                    setWallet(e.target.value);
+                                    setError("");
+                                    handleStateChange(e);
+                                  }}
+                                />
+                              </>
+                            )}
                           </td>
                         </tr>
                         <tr>
-                          <td width="50%" style={{
-                            height: "50px",
-                            verticalAlign: "top",
-                            textAlign: "left"}}>
+                          <td
+                            width="50%"
+                            style={{
+                              height: "50px",
+                              verticalAlign: "top",
+                              textAlign: "left",
+                            }}
+                          >
                             {formErrors.wallet && (
-                              <div className="text-danger">{formErrors.wallet}</div>
+                              <div className="text-danger">
+                                {formErrors.wallet}
+                              </div>
                             )}
                           </td>
-                          <td  width="50%" style={{
-                            height: "50px",
-                            verticalAlign: "top",
-                            textAlign: "left"}}
-                          align="center">
-                          {error && (
-                            <div className="text-danger" style={{right: "-0.7rem", position: "relative"}} >
-                              {error.substring(0, 15).charAt(0).toUpperCase() + error.substring(0, 15).slice(1)}
-                            </div>
-                          )}
+                          <td
+                            width="50%"
+                            style={{
+                              height: "50px",
+                              verticalAlign: "top",
+                              textAlign: "left",
+                            }}
+                            align="center"
+                          >
+                            {error && (
+                              <div
+                                className="text-danger"
+                                style={{
+                                  right: "-0.7rem",
+                                  position: "relative",
+                                }}
+                              >
+                                {error
+                                  .substring(0, 15)
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                  error.substring(0, 15).slice(1)}
+                              </div>
+                            )}
                           </td>
                         </tr>
                       </table>
@@ -542,7 +572,12 @@ const OrganizationFormArea = () => {
           </Col>
           <Col lg={12}>
             <div className="input-box mt-20 text-center">
-              <button id="submit" className="main-btn" type="submit" onClick={onSubmit}>
+              <button
+                id="submit"
+                className="main-btn"
+                type="submit"
+                onClick={onSubmit}
+              >
                 Submit
               </button>
             </div>

@@ -75,7 +75,8 @@ passport.use(
     {
       clientID: process.env.fbClientID,
       clientSecret: process.env.fbClientSecret,
-      callbackURL: "http://localhost:4000/auth/facebook/callback",
+      callbackURL:
+        "https://volunteerhub-backend.onrender.com/auth/facebook/callback",
       profileFields: [
         "id",
         "displayName",

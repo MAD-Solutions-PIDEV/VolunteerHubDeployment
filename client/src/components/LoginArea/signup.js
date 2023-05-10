@@ -33,7 +33,7 @@ const required = (value) => {
 };
 function sendNotification(Phone) {
   axios
-    .post("http://localhost:4000/sms/sendNotification", {
+    .post("https://volunteerhub-backend.onrender.com/sms/sendNotification", {
       phone: Phone,
     })
     .then((response) => {
@@ -282,7 +282,10 @@ function Signup() {
 
   // Google Authentification
   const googleAuth = () => {
-    window.open("http://localhost:4000/auth/google/callback", "_self");
+    window.open(
+      "https://volunteerhub-backend.onrender.com/auth/google/callback",
+      "_self"
+    );
   };
 
   function handleSuccessfulAuthentication(data) {
@@ -296,7 +299,10 @@ function Signup() {
   }
   // Facebook Authentification
   const facebookAuth = () => {
-    window.open("http://localhost:4000/auth/facebook/callback", "_self");
+    window.open(
+      "https://volunteerhub-backend.onrender.com/auth/facebook/callback",
+      "_self"
+    );
   };
 
   //vadlidate sign in

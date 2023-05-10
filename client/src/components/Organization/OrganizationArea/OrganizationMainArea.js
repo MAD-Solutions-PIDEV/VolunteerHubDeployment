@@ -16,43 +16,90 @@ const OrganizationMainArea = ({ className = "", count = 3 }) => {
   const [showFilters, setShowFilters] = useState(false);
 
   const sdgs = [
-    { name: "sdg_0", imageUrl: "http://localhost:4000/uploads/sdgs/SDG1.png" },
-    { name: "sdg_1", imageUrl: "http://localhost:4000/uploads/sdgs/SDG2.png" },
-    { name: "sdg_2", imageUrl: "http://localhost:4000/uploads/sdgs/SDG3.png" },
-    { name: "sdg_3", imageUrl: "http://localhost:4000/uploads/sdgs/SDG4.png" },
-    { name: "sdg_4", imageUrl: "http://localhost:4000/uploads/sdgs/SDG5.png" },
-    { name: "sdg_5", imageUrl: "http://localhost:4000/uploads/sdgs/SDG6.png" },
-    { name: "sdg_6", imageUrl: "http://localhost:4000/uploads/sdgs/SDG7.png" },
-    { name: "sdg_7", imageUrl: "http://localhost:4000/uploads/sdgs/SDG8.png" },
-    { name: "sdg_8", imageUrl: "http://localhost:4000/uploads/sdgs/SDG9.png" },
-    { name: "sdg_9", imageUrl: "http://localhost:4000/uploads/sdgs/SDG10.png" },
+    {
+      name: "sdg_0",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
+    },
+    {
+      name: "sdg_1",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG2.png",
+    },
+    {
+      name: "sdg_2",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG3.png",
+    },
+    {
+      name: "sdg_3",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG4.png",
+    },
+    {
+      name: "sdg_4",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG5.png",
+    },
+    {
+      name: "sdg_5",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG6.png",
+    },
+    {
+      name: "sdg_6",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG7.png",
+    },
+    {
+      name: "sdg_7",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG8.png",
+    },
+    {
+      name: "sdg_8",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG9.png",
+    },
+    {
+      name: "sdg_9",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG10.png",
+    },
     {
       name: "sdg_10",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG11.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG11.png",
     },
     {
       name: "sdg_11",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG12.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG12.png",
     },
     {
       name: "sdg_12",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG13.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG13.png",
     },
     {
       name: "sdg_13",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG14.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG14.png",
     },
     {
       name: "sdg_14",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG15.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG15.png",
     },
     {
       name: "sdg_15",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG16.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG16.png",
     },
     {
       name: "sdg_16",
-      imageUrl: "http://localhost:4000/uploads/sdgs/SDG17.png",
+      imageUrl:
+        "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG17.png",
     },
   ];
 

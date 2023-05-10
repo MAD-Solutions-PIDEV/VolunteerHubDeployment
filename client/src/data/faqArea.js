@@ -1,4 +1,3 @@
-
 export const faqs = [
   {
     id: 1,
@@ -110,43 +109,43 @@ export const faqDesignArea = {
     {
       id: 6,
       href: "pills-11",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-12",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-13",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-14",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-15",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-16",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
     {
       id: 6,
       href: "pills-17",
-      icon: "http://localhost:4000/uploads/sdgs/SDG1.png",
+      icon: "https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG1.png",
       name: "Backers",
     },
   ],

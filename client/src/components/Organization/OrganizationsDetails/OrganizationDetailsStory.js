@@ -10,9 +10,9 @@ const OrganizationDetailsStory = ({ getClassName, organization }) => {
     const lastChar = sdg.charAt(sdg.length - 1);
     const secondLastChar = sdg.charAt(sdg.length - 2);
     if (!isNaN(Number(secondLastChar))) {
-      return `http://localhost:4000/uploads/sdgs/SDG${secondLastChar}${lastChar}.png`;
+      return `https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG${secondLastChar}${lastChar}.png`;
     } else {
-      return `http://localhost:4000/uploads/sdgs/SDG${
+      return `https://volunteerhub-backend.onrender.com/uploads/sdgs/SDG${
         Number(lastChar) + 1
       }.png`;
     }

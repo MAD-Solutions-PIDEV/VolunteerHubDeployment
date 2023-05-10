@@ -21,7 +21,7 @@ const ProfileIntroduction = () => {
 
   const [hasOrganizationRole, setHasOrganizationRole] = useState(false);
   //for rank
- 
+
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -98,7 +98,7 @@ const ProfileIntroduction = () => {
       const loggedUser = JSON.parse(localStorage.getItem("user"));
       console.log(loggedUser.id);
       const response = await axios.get(
-        `http://localhost:4000/org/${loggedUser.id}`
+        `https://volunteerhub-backend.onrender.com/org/${loggedUser.id}`
       );
       //console.log("resp" + response.data.organizations);
       setOrganizations(response.data.organizations);
@@ -112,17 +112,17 @@ const ProfileIntroduction = () => {
     getUserById(storedId)
       .then((res) => {
         if (res) {
-          if(res.Skills[0] != null){
+          if (res.Skills[0] != null) {
             const skillsSelected = [];
             for (let i = 0; i < res.Skills[0].selectedList.length; i++) {
               if (res.Skills[0].selectedList[i].skill) {
-                skillsSelected.push(res.Skills[0].selectedList[i].skill  + " " );
+                skillsSelected.push(res.Skills[0].selectedList[i].skill + " ");
               }
             }
             console.log("skillsSelected", skillsSelected);
             setSkills(skillsSelected);
           }
-        
+
           const user = res;
           setUserId(res._id);
           setFirstName(res.firstName);
@@ -154,7 +154,7 @@ const ProfileIntroduction = () => {
   const userRole = "ROLE_HOST";
   const storedRole = localStorage.getItem("role");
   const storedId = localStorage.getItem("storedId");
-  const [MySkill , setMySkill] = useState("")
+  const [MySkill, setMySkill] = useState("");
 
   const handleUpdate = () => {
     const updatedUser = {
@@ -210,11 +210,11 @@ const ProfileIntroduction = () => {
           />
         )}
         <div className="mr-100 mb-20 mt-0  text-center col-lg-6">
-          {/* <img  src={`http://localhost:4000/uploads/${image}`} /> */}
+          {/* <img  src={`https://volunteerhub-backend.onrender.com/uploads/${image}`} /> */}
 
           {/* <div className="project-details-thumb">
               <Image
-                src={`http://localhost:4000/uploads/${image}`}
+                src={`https://volunteerhub-backend.onrender.com/uploads/${image}`}
                 alt=""
               />
             </div> */}
@@ -247,8 +247,6 @@ const ProfileIntroduction = () => {
                                       <div className="col">
                                         <table className="MuiTable-root css-1hw5bcm">
                                           <tbody className="MuiTableBody-root css-1xnox0e">
-                                       
-
                                             <tr className="MuiTableRow-root css-1wcs08e">
                                               <td className={styles.left}>
                                                 <h6 className={styles.left}>
@@ -318,34 +316,35 @@ const ProfileIntroduction = () => {
                                               <td>
                                                 <div>
                                                   {roleCheck === "volunteer" ? (
-                                                      <tr className={styles.left}>
-                                                        <td
+                                                    <tr className={styles.left}>
+                                                      <td
+                                                        className={styles.left}
+                                                      >
+                                                        <h6
                                                           className={
                                                             styles.left
                                                           }
                                                         >
-                                                          <h6
-                                                            className={
-                                                              styles.left
-                                                            }
-                                                          >
-                                                            Skills
-                                                          </h6>
-                                                        </td>
-                                                        <td
+                                                          Skills
+                                                        </h6>
+                                                      </td>
+                                                      <td
+                                                        className={styles.left}
+                                                      >
+                                                        <p
                                                           className={
-                                                            styles.left
+                                                            styles.display
                                                           }
                                                         >
-                                                          <p
-                                                            className={
-                                                              styles.display
-                                                            }
-                                                          >
-                                                            <div> {skillsSelected} </div>
-                                                          </p>
-                                                        </td>
-                                                      </tr>
+                                                          <div>
+                                                            {" "}
+                                                            {
+                                                              skillsSelected
+                                                            }{" "}
+                                                          </div>
+                                                        </p>
+                                                      </td>
+                                                    </tr>
                                                   ) : (
                                                     <p></p>
                                                   )}
@@ -361,7 +360,6 @@ const ProfileIntroduction = () => {
                                               <td className={styles.left}>
                                                 <p className={styles.left}>
                                                   {languageSpoken}
-                                                
                                                 </p>
                                               </td>
                                             </tr>
@@ -525,19 +523,19 @@ const ProfileIntroduction = () => {
                                                           styles.profileacc
                                                         }
                                                       >
-                                                        {availableServices.internet ? 'Available' : 'Not available'}
+                                                        {availableServices.internet
+                                                          ? "Available"
+                                                          : "Not available"}
                                                       </p>
                                                     </td>
                                                   </tr>
-
-
 
                                                   <tr>
                                                     <td className={styles.left}>
                                                       <h6
                                                         className={styles.left}
                                                       >
-                                                         Animals
+                                                        Animals
                                                       </h6>
                                                     </td>
                                                     <td
@@ -550,18 +548,19 @@ const ProfileIntroduction = () => {
                                                           styles.profileacc
                                                         }
                                                       >
-                                                        {hasAnimals ? 'Has pets' : 'Does not have pets'}
+                                                        {hasAnimals
+                                                          ? "Has pets"
+                                                          : "Does not have pets"}
                                                       </p>
                                                     </td>
                                                   </tr>
 
-                                                  
                                                   <tr>
                                                     <td className={styles.left}>
                                                       <h6
                                                         className={styles.left}
                                                       >
-                                                         Music
+                                                        Music
                                                       </h6>
                                                     </td>
                                                     <td
@@ -574,12 +573,13 @@ const ProfileIntroduction = () => {
                                                           styles.profileacc
                                                         }
                                                       >
-                                                       {musicAllowed ? 'Allowed' : 'Not allowed'}
+                                                        {musicAllowed
+                                                          ? "Allowed"
+                                                          : "Not allowed"}
                                                       </p>
                                                     </td>
                                                   </tr>
 
-                                                                                                    
                                                   <tr>
                                                     <td className={styles.left}>
                                                       <h6
@@ -598,7 +598,9 @@ const ProfileIntroduction = () => {
                                                           styles.profileacc
                                                         }
                                                       >
-                                                       {doesSmoke ? 'Does smoke' : 'Does not smoke'}                                
+                                                        {doesSmoke
+                                                          ? "Does smoke"
+                                                          : "Does not smoke"}
                                                       </p>
                                                     </td>
                                                   </tr>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/"; 
+const API_URL = "https://volunteerhub-backend.onrender.com/";
 
 class NewPassword {
   resetPassword(resetPasswordCode, email, password) {
@@ -9,11 +9,6 @@ class NewPassword {
       password,
     });
   }
-  
 }
-
-
-
-
 
 export default new NewPassword();

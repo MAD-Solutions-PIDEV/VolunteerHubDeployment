@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:4000/address/";
+const API_URL = "https://volunteerhub-backend.onrender.com/address/";
 
 const getAddressesByCountry = async (country) => {
   const response = await axios.get(`${API_URL}/country/${country}`);

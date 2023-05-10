@@ -14,55 +14,53 @@ function ListEvents() {
   }, []);
 
   const onClickHandler = () => {
-    fetch('http://localhost:4000/shuffle')
-      .then(response => {
+    fetch("https://volunteerhub-backend.onrender.com/shuffle")
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         // Process the fetched data here
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         // Display error message or take necessary action
       });
-  }
+  };
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);
     const options = {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: false,
-      timeZone: 'UTC'
+      timeZone: "UTC",
     };
-    return date.toLocaleString('en-US', options).replace(',', ' |');
+    return date.toLocaleString("en-US", options).replace(",", " |");
   }
-  
+
   useEffect(() => {
     EventService.fetchEvents()
       .then(async (res) => {
         setEvents(res);
-        console.log(res)
+        console.log(res);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const handleApprovalChange = async (eventId, newStatus) => {
-    try {     
-
+    try {
       if (newStatus === "approved") {
         await EventService.approveEvent(eventId);
       } else if (newStatus === "rejected") {
         await EventService.cancelEvent(eventId);
       }
-      const updateList =
-        await EventService.fetchEvents();
+      const updateList = await EventService.fetchEvents();
       setEvents(updateList);
     } catch (error) {
       console.log(error);
@@ -79,13 +77,13 @@ function ListEvents() {
       name: "Start date",
       selector: "startDate",
       sortable: true,
-      format: row => formatDate(row.startDate)
+      format: (row) => formatDate(row.startDate),
     },
     {
       name: "End Date",
       selector: "endDate",
       sortable: true,
-      format: row => formatDate(row.endDate)
+      format: (row) => formatDate(row.endDate),
     },
     {
       name: "organization",
@@ -99,8 +97,12 @@ function ListEvents() {
     },
     {
       name: "Location",
-      selector:() => (
-        <a href={`https://www.google.com/maps/dir//${location[0].latitude},${location[0].longitude}/@${location[0].latitude},${location[0].longitude},10.5z`}>View on google maps</a>
+      selector: () => (
+        <a
+          href={`https://www.google.com/maps/dir//${location[0].latitude},${location[0].longitude}/@${location[0].latitude},${location[0].longitude},10.5z`}
+        >
+          View on google maps
+        </a>
       ),
       sortable: true,
     },

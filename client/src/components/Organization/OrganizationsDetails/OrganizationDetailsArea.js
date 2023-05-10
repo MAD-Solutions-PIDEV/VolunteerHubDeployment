@@ -63,7 +63,7 @@ const OrganizationDetailsArea = ({ organization }) => {
           <Col lg={7}>
             <div className="project-details-thumb">
               <Image
-                src={`http://localhost:4000/uploads/${organization.logo}`}
+                src={`https://volunteerhub-backend.onrender.com/uploads/${organization.logo}`}
                 alt=""
                 style={{ width: "400px", height: "auto" }}
               />

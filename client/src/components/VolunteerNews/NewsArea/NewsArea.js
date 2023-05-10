@@ -6,10 +6,6 @@ import NewsItem from "./NewsItem";
 
 import axios from "axios";
 
-
-
-
-
 const { tagline, title } = newsArea;
 
 const NewsArea = ({ className = "", newsTwo = false, newsPage = false }) => {
@@ -18,7 +14,9 @@ const NewsArea = ({ className = "", newsTwo = false, newsPage = false }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/news");
+        const response = await axios.get(
+          "https://volunteerhub-backend.onrender.com/news"
+        );
         setNewsData(response.data);
       } catch (error) {
         console.error(error);
@@ -28,14 +26,12 @@ const NewsArea = ({ className = "", newsTwo = false, newsPage = false }) => {
     fetchData();
   }, []);
 
-  console.log('news : '+JSON.stringify(newsData));
-  console.log('type n:'+typeof newsData); // Check the type of newses prop
-  console.log('type n2:'+typeof newsData.news); // Check the type of newses prop
+  console.log("news : " + JSON.stringify(newsData));
+  console.log("type n:" + typeof newsData); // Check the type of newses prop
+  console.log("type n2:" + typeof newsData.news); // Check the type of newses prop
 
   const newses = newsData.news;
 
-
-  
   return (
     <section className={`news-area ${className}`}>
       <Container>
@@ -47,19 +43,18 @@ const NewsArea = ({ className = "", newsTwo = false, newsPage = false }) => {
           </Row>
         )}
         <Row className={"no-gutters"}>
-          {newsData && newses && newses
-            .slice(0, newsPage ? undefined : newsTwo ? 3 : 4)
-            .map((news, index) => (
-            
-              <NewsItem
-                key={news.id}
-                news={news}
-                index={index}
-                newsTwo={newsTwo}
-              />
-              
-            ))}
-         
+          {newsData &&
+            newses &&
+            newses
+              .slice(0, newsPage ? undefined : newsTwo ? 3 : 4)
+              .map((news, index) => (
+                <NewsItem
+                  key={news.id}
+                  news={news}
+                  index={index}
+                  newsTwo={newsTwo}
+                />
+              ))}
         </Row>
       </Container>
     </section>

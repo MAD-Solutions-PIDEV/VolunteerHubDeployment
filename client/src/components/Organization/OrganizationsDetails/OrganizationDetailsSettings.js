@@ -18,7 +18,7 @@ const ProjectDetailsSettings = ({ getClassName, organization }) => {
       return "";
     }
     //const letter = firstName.charAt(0).toUpperCase();
-    const imageSrc = `http://localhost:4000/uploads/Alphabet/${gender}.png`;
+    const imageSrc = `https://volunteerhub-backend.onrender.com/uploads/Alphabet/${gender}.png`;
     return imageSrc;
   };
 
