@@ -129,13 +129,13 @@ function NewsListPagination() {
                               <td>{description(news.description)}</td>
                               <td>
                                 {" "}
-                                {news.author == "Admin" && (
+                                {/* {news.author == "Admin" && (
                                   <Image
                                     src={require(`https://volunteerhub-backend.onrender.com/uploads/images/${news.imageNews}`)}
                                     alt="news"
                                     style={{ width: "50px", height: "40px" }}
                                   />
-                                )}
+                                )} */}
                                 {news.author == "United nations" && (
                                   <Image
                                     src={news.imageNews}

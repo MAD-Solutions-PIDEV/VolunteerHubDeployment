@@ -16,13 +16,13 @@ const NewsItem = ({ news = {}, index = 0, newsTwo = false }) => {
     <Col lg={newsTwo ? 4 : 3} md={newsTwo ? 7 : 6}>
       <div className={`news-item mt-30${""}`}>
         <div className="news-thumb">
-          {author == "Admin" && (
+          {/* {author == "Admin" && (
             <Image
-              src={require(`https://volunteerhub-backend.onrender.com/uploads/images/${imageNews}`)}
+              src={`https://volunteerhub-backend.onrender.com/uploads/images/${imageNews}`}
               alt="news"
               style={{ width: "300px", height: "200px" }}
             />
-          )}
+          )} */}
           {author == "United nations" && (
             <Image
               src={imageNews}
