@@ -22,6 +22,12 @@ export async function getMission() {
   export async function updateMission(id, updateMission) {
     return await axios.put(`${apiUrl}missions/${id}`, updateMission);
   }
+  export async function recommendedmissions(missions) {
+    return await axios.post(
+      "https://volunteerhub-ml-flask.onrender.com/predict/match/",
+      missions
+    );
+  }
 
   export async function refuseMission(id){
     return await axios.put(`${apiUrl}missions/refuse/${id}`);
