@@ -234,8 +234,8 @@ exports.signin = (req, res) => {
         gender: user.gender,
         roles: authorities,
         phone: user.phone,
-        donationTimes:user.donationTimes,
-        birthday:user.birthday,
+        donationTimes: user.donationTimes,
+        birthday: user.birthday,
         isActive: user.isActive,
       });
     });
@@ -340,7 +340,7 @@ function sendPasswordResetEmail(req, email, resetToken) {
     text:
       "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
       "Please click on the following link:\n\n" +
-      "http://localhost:3000" +
+      "https://volunteerhub.onrender.com" +
       "/reset/" +
       "\n\n" +
       "And paste this code into your browser to complete the process:" +

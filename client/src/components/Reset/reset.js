@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./reset.module.css";
 import classNames from "classnames";
-import { useRef, useEffect,useState } from "react";
-
+import { useRef, useEffect, useState } from "react";
 
 import NewPassword from "services/NewPasswordService";
 
@@ -21,13 +20,12 @@ function Reset() {
   const btnTransparent = classNames(styles.btn, styles.transparent);
   const containerMode = classNames(styles.container, styles.signUpMode);
 
-  
   const [resetPasswordCode, setResetPasswordCode] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   const [notification, setNotification] = useState(null);
   const [notificationType, setNotificationType] = useState(null);
   const navigates = useNavigate();
@@ -39,22 +37,26 @@ function Reset() {
 
   const handleReset = async (event) => {
     event.preventDefault();
-  if (
-    resetPasswordCode.length < 40 ||
-    resetPasswordCode.length > 40 ||
-    !/\d/.test(resetPasswordCode)
-  ) {
-    setNotification("Oops! The reset password code is invalid.");
-    setNotificationType("error");
-    return;
-  }
-  if (password.length < 8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
-    setNotification(
-      "Password must be at least 8 characters and contain a capital letter and a number."
-    );
-    setNotificationType("error");
-    return;
-  }
+    if (
+      resetPasswordCode.length < 40 ||
+      resetPasswordCode.length > 40 ||
+      !/\d/.test(resetPasswordCode)
+    ) {
+      setNotification("Oops! The reset password code is invalid.");
+      setNotificationType("error");
+      return;
+    }
+    if (
+      password.length < 8 ||
+      !/\d/.test(password) ||
+      !/[A-Z]/.test(password)
+    ) {
+      setNotification(
+        "Password must be at least 8 characters and contain a capital letter and a number."
+      );
+      setNotificationType("error");
+      return;
+    }
 
     setLoading(true);
 
@@ -165,7 +167,6 @@ function Reset() {
             />
             <p className={styles.socialText}></p>
           </form>
-          
         </div>
       </div>
 
@@ -176,7 +177,7 @@ function Reset() {
             <button id="sign-up-btn" ref={signUpBtnRef}></button>
           </div>
           <img
-            src="http://localhost:3000/assets/img/login.svg"
+            src="https://volunteerhub.onrender.com/assets/img/login.svg"
             className={styles.image}
             alt=""
           />

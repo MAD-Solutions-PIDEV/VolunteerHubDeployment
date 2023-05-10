@@ -335,7 +335,7 @@ const Login = () => {
     );
   };
   const ForgotPassword = () => {
-    window.open("http://localhost:3000/email", "_self");
+    window.open("https://volunteerhub.onrender.com/email", "_self");
   };
 
   const axios = require("axios");
@@ -360,7 +360,7 @@ const Login = () => {
         autoPlay
         loop
         muted
-        src="http://localhost:3000/assets/img/bg.png"
+        src="https://volunteerhub.onrender.com/assets/img/bg.png"
         type="video/mp4"
       />
       <div>

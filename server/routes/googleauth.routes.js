@@ -52,12 +52,12 @@ router.get("/", requireAuth, (req, res) => {
     token: req.user.token,
   };
   const encodedData = encodeURIComponent(JSON.stringify(data));
-  res.redirect(`http://localhost:3000/auth?data=${encodedData}`);
+  res.redirect(`https://volunteerhub.onrender.com/auth?data=${encodedData}`);
 });
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("http://localhost:3000/");
+  res.redirect("https://volunteerhub.onrender.com/");
 });
 
 module.exports = router;

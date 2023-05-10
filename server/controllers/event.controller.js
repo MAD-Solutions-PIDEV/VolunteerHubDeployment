@@ -364,8 +364,8 @@ function template(
             <br>
             <p>Best regards,</p>
             <p>The VolunteerHub Team</p>
-            <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
-            <p style="text-align: center;"><a href="http://localhost:3000/event/${id}" style="text-decoration: none; color:white" class="btn">View Event</a></p>
+            <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+            <p style="text-align: center;"><a href="https://volunteerhub.onrender.com/event/${id}" style="text-decoration: none; color:white" class="btn">View Event</a></p>
           </div>
         </body>
       </html> 
@@ -458,7 +458,6 @@ exports.approval = async (req, res) => {
   }
 };
 
-
 exports.shuffle = async (req, res) => {
   Activity.distinct("user", {
     action: { $regex: /^participate/i },
@@ -503,7 +502,7 @@ exports.shuffle = async (req, res) => {
     .catch((err) => {
       console.error(err);
     });
-}
+};
 
 const SetWinner = schedule.scheduleJob("0 10 11 * *", async () => {
   Activity.distinct("user", {
@@ -553,7 +552,7 @@ const SetWinner = schedule.scheduleJob("0 10 11 * *", async () => {
 
 exports.postNFT = async (req, res) => {
   const username = req.body.username;
-  console.log("username=",username)
+  console.log("username=", username);
   // Set the path to the project directory
   const projectDir = path.join(__dirname, "..");
 
@@ -724,8 +723,6 @@ exports.findComments = async (req, res) => {
   }
 };
 
-
-
 exports.createPost = async (req, res) => {
   const prompt = req.body.prompt;
   const username = req.body.username;
@@ -743,8 +740,7 @@ exports.createPost = async (req, res) => {
       // download the image from the API response to a specific directory
       const imageFilePath = await downloadImage(imageUrl);
       //send JSON response to front end, with the data being the image in this case
-      const py = await 
-      res.status(200).json({
+      const py = await res.status(200).json({
         success: true,
         data: imageUrl,
       });
@@ -829,14 +825,14 @@ exports.checkGame = async (req, res) => {
 
 exports.getNFT = async (req, res) => {
   const userId = req.params.userId;
-  User.findById(userId, 'nfts', (err, user) => {
+  User.findById(userId, "nfts", (err, user) => {
     if (err) {
       console.error(err);
       // Handle error
     } else {
       const nfts = user.nfts;
-      res.send(nfts)
+      res.send(nfts);
       console.log(nfts);
     }
   });
-}
+};

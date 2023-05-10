@@ -110,7 +110,7 @@ require("./routes/event.routes")(app);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://volunteerhub.onrender.com",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })

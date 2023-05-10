@@ -26,7 +26,7 @@ const OrganizationDetailsSidebar = ({ organization }) => {
         <div className="info">
           <Image
             style={{ left: "-10%" }}
-            src="http://localhost:3000/assets/img/address.svg"
+            src="https://volunteerhub.onrender.com/assets/img/address.svg"
             alt=""
             width={120}
             height={120}

@@ -7,7 +7,6 @@ import "../styles/index.css";
 import "../styles/login.css";
 import "../styles/resetnotif.css";
 
-
 const required = (value) => {
   if (!value) {
     return (
@@ -277,7 +276,7 @@ export const VideoBg = styled.video`
 
 const EmailPwd = () => {
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState(null);
   const [notificationType, setNotificationType] = useState(null);
   const navigates = useNavigate();
@@ -289,12 +288,12 @@ const EmailPwd = () => {
 
     AuthService.passwordResetRequest(email)
       .then((response) => {
-          setNotification(response.data.message);
-          setNotificationType("success");
+        setNotification(response.data.message);
+        setNotificationType("success");
       })
       .catch((error) => {
         setNotification(error.message);
-      setNotificationType("error");
+        setNotificationType("error");
       })
       .finally(() => {
         setLoading(false);
@@ -305,7 +304,6 @@ const EmailPwd = () => {
     setEmail(event.target.value);
   };
 
-   
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -316,7 +314,7 @@ const EmailPwd = () => {
         autoPlay
         loop
         muted
-        src="http://localhost:3000/assets/img/bg.png"
+        src="https://volunteerhub.onrender.com/assets/img/bg.png"
         type="video/mp4"
       />
       <div>

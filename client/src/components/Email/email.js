@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./reset.module.css";
 import classNames from "classnames";
-import { useRef, useEffect,useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import AuthService from "services/ResetPasswordService";
@@ -15,47 +15,43 @@ function Email() {
   const rightPanel = classNames(styles.panel, styles.rightPanel);
   const btnTransparent = classNames(styles.btn, styles.transparent);
   const containerMode = classNames(styles.container, styles.signUpMode);
-  
+
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState(null);
   const [notificationType, setNotificationType] = useState(null);
-const required = (value) => {
-  if (!value) {
-    return (
-      <div >This field is required!</div>
-    );
-  }
-};
-    const navigates = useNavigate();
+  const required = (value) => {
+    if (!value) {
+      return <div>This field is required!</div>;
+    }
+  };
+  const navigates = useNavigate();
 
-    const handleReset = (event) => {
-      event.preventDefault();
+  const handleReset = (event) => {
+    event.preventDefault();
 
-      setLoading(true);
+    setLoading(true);
 
-      AuthService.passwordResetRequest(email)
-        .then((response) => {
-          setNotification(response.data.message);
-          setNotificationType("success");
-        })
-        .catch((error) => {
-           setNotification(
-             "Oops! Something went wrong. Please try again."
-           );
-           setNotificationType("error");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
+    AuthService.passwordResetRequest(email)
+      .then((response) => {
+        setNotification(response.data.message);
+        setNotificationType("success");
+      })
+      .catch((error) => {
+        setNotification("Oops! Something went wrong. Please try again.");
+        setNotificationType("error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-   const onChangeEmail = (event) => {
-     setEmail(event.target.value);
-   };
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
 
-   const [click, setClick] = useState(false);
-   const handleClick = () => setClick(!click);
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
 
   const signInBtnRef = useRef(null);
   const signUpBtnRef = useRef(null);
@@ -129,7 +125,7 @@ const required = (value) => {
             <button id="sign-up-btn" ref={signUpBtnRef}></button>
           </div>
           <img
-            src="http://localhost:3000/assets/img/login.svg"
+            src="https://volunteerhub.onrender.com/assets/img/login.svg"
             className={styles.image}
             alt=""
           />

@@ -20,7 +20,7 @@ const CtaOrganizationArea = () => {
                 <h3 className="title">{title}</h3>
                 <a
                   className="main-btn main-btn-2"
-                  href="http://localhost:3000/organization/addOrganization"
+                  href="https://volunteerhub.onrender.com/organization/addOrganization"
                 >
                   Make it happen
                 </a>

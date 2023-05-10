@@ -516,7 +516,9 @@ function Signup() {
             )}
 
             <label className="resetPwd">
-              <a href="http://localhost:3000/email">Reset Password</a>
+              <a href="https://volunteerhub.onrender.com/email">
+                Reset Password
+              </a>
             </label>
             <Captcha
               onCheck={handleCaptchaCheck}
@@ -723,7 +725,7 @@ function Signup() {
                     />
                     &nbsp;&nbsp;By signing up, I agree to VolunteerHub's{" "}
                     <a
-                      href="http://localhost:3000/terms"
+                      href="https://volunteerhub.onrender.com/terms"
                       target="_blank"
                       rel="Terms volunteerHub"
                     >
@@ -842,7 +844,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="http://localhost:3000/assets/img/login.svg"
+            src="https://volunteerhub.onrender.com/assets/img/login.svg"
             className={styles.image}
             alt=""
           />
@@ -862,7 +864,7 @@ function Signup() {
             </button>
           </div>
           <img
-            src="http://localhost:3000/assets/img/signup.svg"
+            src="https://volunteerhub.onrender.com/assets/img/signup.svg"
             className={styles.image}
             alt=""
           />

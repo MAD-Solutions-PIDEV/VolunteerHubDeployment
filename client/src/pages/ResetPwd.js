@@ -331,7 +331,7 @@ const ResetPwd = () => {
         autoPlay
         loop
         muted
-        src="http://localhost:3000/assets/img/bg.png"
+        src="https://volunteerhub.onrender.com/assets/img/bg.png"
         type="video/mp4"
       />
       <div>

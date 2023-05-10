@@ -323,9 +323,9 @@ const CodePwd = () => {
     );
   };
 
-   const ConfirmReset = () => {
-     window.open("http://localhost:3000/confirmreset", "_self");
-   };
+  const ConfirmReset = () => {
+    window.open("https://volunteerhub.onrender.com/confirmreset", "_self");
+  };
 
   const axios = require("axios");
   let navigate = useNavigate();
@@ -338,7 +338,7 @@ const CodePwd = () => {
         autoPlay
         loop
         muted
-        src="http://localhost:3000/assets/img/bg.png"
+        src="https://volunteerhub.onrender.com/assets/img/bg.png"
         type="video/mp4"
       />
       <div>
@@ -349,7 +349,7 @@ const CodePwd = () => {
 
         <Form className="signin" onSubmit={handleReset} ref={form}>
           <Title>Reset Password</Title>
-          
+
           <Input
             type="text"
             name="code"

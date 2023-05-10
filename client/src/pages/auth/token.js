@@ -17,8 +17,8 @@ const AuthRedirectPage = () => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
     // Redirect to the dashboard page
-    //navigate("http://localhost:3000/");
-    window.location.href = "http://localhost:3000/";
+    //navigate("https://volunteerhub.onrender.com/");
+    window.location.href = "https://volunteerhub.onrender.com/";
   }
 
   return <div>Redirecting...</div>;

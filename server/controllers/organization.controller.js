@@ -139,7 +139,7 @@ const createOrg = async (req, res) => {
         <p>If you have any questions or concerns, please don't hesitate to reach out to us.</p>
         <p>Best regards,</p>
         <p>The VolunteerHub team</p>
-        <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+        <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
       </div>
     </body>
     </html>
@@ -234,8 +234,8 @@ const activateOrg = async (req, res) => {
           <p>Thank you for joining VolunteerHub!</p>
           <p>Best regards,</p>
           <p>The VolunteerHub Team</p>
-          <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
-          <p style="text-align: center;"><a href="http://localhost:3000/login" style="text-decoration: none; color:white" class="btn">Log in to VolunteerHub</a></p>
+          <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+          <p style="text-align: center;"><a href="https://volunteerhub.onrender.com/login" style="text-decoration: none; color:white" class="btn">Log in to VolunteerHub</a></p>
         </div>
       </body>
     </html> 
@@ -336,7 +336,7 @@ const archiveOrg = async (req, res) => {
           <p>Thank you for being a part of the VolunteerHub community. We wish you all the best in your future endeavors.</p>
           <p>Best regards,</p>
           <p>The VolunteerHub Team</p>
-          <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+          <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
         </div>
       </body>
     </html> 
@@ -430,7 +430,7 @@ const deactivateOrg = async (req, res) => {
           <p>Thank you for your understanding and cooperation. We look forward to working with you again soon.</p>
           <p>Best regards,</p>
           <p>The VolunteerHub Team</p>
-          <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+          <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
         </div>
       </body>
     </html> 
@@ -494,7 +494,7 @@ const blockOrg = async (req, res) => {
           <p>Thank you for your understanding.</p>
           <p>Best regards,</p>
           <p>The VolunteerHub Team</p>
-          <a href="http://localhost:3000/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
+          <a href="https://volunteerhub.onrender.com/"><img src="https://i.ibb.co/Y20GL2q/signature.png" alt="signature" border="0" style="width:10rem"></a>
         </div>
       </body>
     </html> 

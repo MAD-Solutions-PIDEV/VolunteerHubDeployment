@@ -18,7 +18,7 @@ router.get(
     };
     const encodedData = encodeURIComponent(JSON.stringify(data));
 
-    res.redirect(`http://localhost:3000/auth?data=${encodedData}`);
+    res.redirect(`https://volunteerhub.onrender.com/auth?data=${encodedData}`);
   }
 );
 
@@ -46,7 +46,7 @@ router.get("/", requireAuth, (req, res) => {
 
   const encodedData = encodeURIComponent(JSON.stringify(data));
 
-  res.redirect(`http://localhost:3000/auth?data=${encodedData}`);
+  res.redirect(`https://volunteerhub.onrender.com/auth?data=${encodedData}`);
 });
 
 router.get("/signout", (req, res) => {
@@ -54,7 +54,7 @@ router.get("/signout", (req, res) => {
     req.session.destroy(function (err) {
       console.log("session destroyed.");
     });
-    res.redirect("http://localhost:3000/login");
+    res.redirect("https://volunteerhub.onrender.com/login");
   } catch (err) {
     res.status(400).send({ message: "Failed to sign out fb user" });
   }

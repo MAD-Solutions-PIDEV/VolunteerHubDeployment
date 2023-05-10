@@ -33,7 +33,7 @@ const Pending = ({ match }) => {
           </Col>
           <Col lg={7}>
             <Image
-              src="http://localhost:3000/assets/img/pending.svg"
+              src="https://volunteerhub.onrender.com/assets/img/pending.svg"
               alt="pending"
             />
           </Col>

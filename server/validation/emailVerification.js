@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
-const user = "dorrabalti00@gmail.com"; // hedhi t7ot feha l email 
-const pass = "vybzwlexcysniudn"; // houni lazmek ta3mel generation lel code hedha gmail apps 
+const user = "dorrabalti00@gmail.com"; // hedhi t7ot feha l email
+const pass = "vybzwlexcysniudn"; // houni lazmek ta3mel generation lel code hedha gmail apps
 
 const transport = nodemailer.createTransport({
   service: "Gmail",
@@ -11,13 +11,7 @@ const transport = nodemailer.createTransport({
   },
 });
 //fonction te5ou 3 parametres
-module.exports.sendConfirmationEmail = (
-  name,
-  email,
-  confirmationCode
-  
-) => {
-
+module.exports.sendConfirmationEmail = (name, email, confirmationCode) => {
   // transport houwa jesr from chkoun to amal  html body message chnouwa f wostou
   transport
     .sendMail({
@@ -63,12 +57,10 @@ module.exports.sendConfirmationEmail = (
     <div class="container">
       <p>Hello ${name},</p>
       <p>Thank you for registering with our service. To complete your registration, please click the link below to verify your email address:</p>
-      <p><a href="http://localhost:3000/confirm/${confirmationCode}">Click here to verify your email address</a></p>
+      <p><a href="https://volunteerhub.onrender.com/confirm/${confirmationCode}">Click here to verify your email address</a></p>
       <p>If you did not register for our service, please ignore this message.</p>
     </div>
   </body>`,
     })
     .catch((err) => console.log(err));
 };
-
-

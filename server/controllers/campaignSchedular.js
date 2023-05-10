@@ -35,7 +35,7 @@ async function checkCampaignStatus() {
         <p>Your compaign is finish you can consult more details collected in your organization space.</p>
         <p>your conllected amount is = ${campaign.currentAmount}</p>
         <p>The VolunteerHub team</p>
-        <a href="http://localhost:3000/"></a>
+        <a href="https://volunteerhub.onrender.com/"></a>
       </div>
     </body>
     </html>
