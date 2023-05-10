@@ -1,4 +1,10 @@
 {
-  "buildCommand": "cd client && npm install && npm run build",
-  "startCommand": "cd client && npm run start"
+  "buildCommand": "npm run build",
+  "devCommand": "npm start",
+  "routes": [
+    {
+      "src": "^/.*",
+      "dest": "/index.html"
+    }
+  ]
 }
