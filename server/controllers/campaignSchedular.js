@@ -1,8 +1,8 @@
-const Campaign = require('../models/Campaign');
-const {CompleteCampaign}=require('./campaignController');
+const Campaign = require("../models/Campaign");
+const { CompleteCampaign } = require("./campaignController");
 const sendEmailToOrganization = require("../utilities/organizationEmail");
-const { getById } = require('./organization.controller');
-const Organization =require('../models/Organization');
+const { getById } = require("./organization.controller");
+const Organization = require("../models/Organization");
 async function checkCampaignStatus() {
   try {
     const campaigns = await Campaign.find(); // Retrieve all campaigns
@@ -12,13 +12,18 @@ async function checkCampaignStatus() {
       const organization = await getById(campaign.organization);
       //console.log(organization);
       //console.log(organization);
-      if (!(campaign.status==="completed") &&(currentAmount === goalAmount || Date.now() >= campaign.deadline || currentAmount >= goalAmount  )) {
+      if (
+        !(campaign.status === "completed") &&
+        (currentAmount === goalAmount ||
+          Date.now() >= campaign.deadline ||
+          currentAmount >= goalAmount)
+      ) {
         // If the campaign has reached its goal amount or the deadline has passed, set the status to "closed"
         campaign.status = "completed";
         await CompleteCampaign(campaign._id); // Update the campaign status in the database
         console.log(campaign);
         const subject = `ampaign ${campaign.title} Completed`;
-    const html = `<!DOCTYPE html>
+        const html = `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -36,8 +41,8 @@ async function checkCampaignStatus() {
     </html>
     
  `;
- console.log(organization.email);
-    await sendEmailToOrganization(organization.email, subject, html);
+        console.log(organization.email);
+        await sendEmailToOrganization(organization.email, subject, html);
       }
     }
   } catch (error) {

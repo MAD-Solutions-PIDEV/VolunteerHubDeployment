@@ -63,7 +63,7 @@ app.use("/sms", SMSRouter);
 app.use("/campaign", campaignRouter);
 app.use("/donation", donationRouter);
 app.use("/news", newsRouter);
-app.use("/commentNews",commentNewsRouter)
+app.use("/commentNews", commentNewsRouter);
 app.use("/rank", rankRoutes);
 // PORT
 const port = process.env.PORT || 4000;
@@ -179,7 +179,7 @@ cron.schedule("0 0 1 1,3,6,9 *", () => {
 });
 
 // Start the campaign scheduler cron job
-cron.schedule("*/30 * * * * *", () => {
+cron.schedule("*/60 * * * * *", () => {
   console.log("Campaign Schedular loading ");
   checkCampaignStatus();
 });
@@ -207,13 +207,13 @@ app.post("/donationPrediction", (req, res) => {
   // Construction de la liste des arguments pour le script Python
   const args = [JSON.stringify(newDonor)];
 
-    // Appel du script Python avec les arguments en entrée
-    const pyProg = spawn(pythonInterpreter, [scriptPath, ...args]);
+  // Appel du script Python avec les arguments en entrée
+  const pyProg = spawn(pythonInterpreter, [scriptPath, ...args]);
 
-   // Récupération des résultats de la prédiction
-   pyProg.stdout.on('data', (data) => {
+  // Récupération des résultats de la prédiction
+  pyProg.stdout.on("data", (data) => {
     const predictedAmount = parseInt(data.toString());
-    res.status(200).send( predictedAmount.toString().trim());
+    res.status(200).send(predictedAmount.toString().trim());
   });
 
   // const pyProg = spawn("/usr/local/bin/python3", [
@@ -225,11 +225,14 @@ app.post("/donationPrediction", (req, res) => {
   //   res.status(200).send(predictedAmount.toString().trim());
   // });
   // Gestion des erreurs
-  pyProg.stderr.on('data', (data) => {
+  pyProg.stderr.on("data", (data) => {
     console.error(`Erreur dans le script Python : ${data}`);
-    res.status(500).send('Une erreur s\'est produite lors de la prédiction du montant de don.');
+    res
+      .status(500)
+      .send(
+        "Une erreur s'est produite lors de la prédiction du montant de don."
+      );
   });
-
 });
 
 //address routes
